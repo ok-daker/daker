@@ -14,5 +14,9 @@ namespace Daker.Test.Controllers
         {
             return View();
         }
+            public ActionResult Hi()
+        {
+            return Content("Hi");
+        }
 	}
 }
