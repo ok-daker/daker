@@ -16,7 +16,7 @@ namespace Daker.Test.Controllers
         }
             public ActionResult Hi()
         {
-            return Content("Hi");
+            return Content("Hi-hi");
         }
 	}
 }
