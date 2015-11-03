@@ -14,6 +14,10 @@ namespace Daker.Test.Controllers
         {
             return View();
         }
+        public ActionResult Cry()
+        {
+            return Content("):--hahha");
+        }
             public ActionResult Hi()
         {
             return Content("Hi-hi");
