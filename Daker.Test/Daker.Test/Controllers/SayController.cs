@@ -16,7 +16,7 @@ namespace Daker.Test.Controllers
         }
         public ActionResult Cry()
         {
-            return Content("):");
+            return Content("):--hahha");
         }
             public ActionResult Hi()
         {
