@@ -22,5 +22,9 @@ namespace Daker.Test.Controllers
         {
             return Content("Hi-hi");
         }
+            public ActionResult Wind()
+            {
+                return View();
+            }
 	}
 }
