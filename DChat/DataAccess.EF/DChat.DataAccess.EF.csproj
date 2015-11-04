@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1DA6D5B3-61CC-4D99-B17E-329B8D6322A0}</ProjectGuid>
+    <ProjectGuid>{F676B21D-99EE-452C-A452-F8AA6448F0E0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Framework</RootNamespace>
-    <AssemblyName>Framework</AssemblyName>
+    <RootNamespace>DChat.DataAccess.EF</RootNamespace>
+    <AssemblyName>DChat.DataAccess.EF</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,13 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Cache\" />
-    <Folder Include="IOC\" />
-    <Folder Include="Log\" />
-    <Folder Include="Security\" />
-    <Folder Include="Unity\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
