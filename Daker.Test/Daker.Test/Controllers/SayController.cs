@@ -22,16 +22,9 @@ namespace Daker.Test.Controllers
         {
             return Content("Hi-hi");
         }
-<<<<<<< HEAD
         public ActionResult Wind()
         {
             return Content("hu~~~");
         }
-=======
-            public ActionResult Wind()
-            {
-                return Content("abc-at-home");
-            }
->>>>>>> 9ab1dbe1cf854738c258f8395c4b41b2a1f90987
 	}
 }
