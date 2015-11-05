@@ -15,7 +15,7 @@ namespace DChat.Framework.Cache
         private readonly string host;
         public RedisCache()
         {
-            ConfigurationFileMap filemap = new ConfigurationFileMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "/config/redis.config"));
+            ConfigurationFileMap filemap = new ConfigurationFileMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config/redis.config"));
             RedisConfig config = ConfigurationManager.OpenMappedMachineConfiguration(filemap).GetSection("redis") as RedisConfig;
             host = config.Host;
             if (!string.IsNullOrEmpty(host))

@@ -33,6 +33,7 @@ namespace DChat.Framework.Cache
                 this["InitialDB"] = value;
             }
         }
+        [ConfigurationProperty("ConnectTimeout")]
         public int ConnectTimeout
         {
             get
