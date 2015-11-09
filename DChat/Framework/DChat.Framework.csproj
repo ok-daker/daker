@@ -81,12 +81,8 @@
     <Compile Include="Cache\RedisConfig.cs" />
     <Compile Include="IOC\Resolver.cs" />
     <Compile Include="Log\ILogger.cs" />
-    <Compile Include="Log\ILoggerFactory.cs" />
     <Compile Include="Log\Log4NetLogger.cs" />
-    <Compile Include="Log\Log4NetLoggerFactory.cs" />
     <Compile Include="Log\LoggerExtensions.cs" />
-    <Compile Include="Log\NullLogger.cs" />
-    <Compile Include="Log\NullLoggerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

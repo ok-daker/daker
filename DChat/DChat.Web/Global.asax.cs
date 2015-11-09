@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DChat.Framework.IOC;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,6 +13,7 @@ namespace DChat.Web
     {
         protected void Application_Start()
         {
+            Resolver.configure(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config/unity.config"));
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
