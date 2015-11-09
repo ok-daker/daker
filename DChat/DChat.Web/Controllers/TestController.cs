@@ -10,21 +10,23 @@ namespace DChat.Web.Controllers
 {
     public class TestController : Controller
     {
-        ILogger _log;
-        public TestController()
+        private readonly ILogger _log;
+        private readonly IRedisCache _cache;
+        
+        public TestController(ILogger log)
         {
-            _log = DChat.Framework.IOC.Resolver.Current.Resolve<ILogger>();
+            _log = log;
         }
         // GET: Test
         public ActionResult Index()
         {
-          
+
             _log.Error("ERROR:test by fierce");
             _log.Debug("Debug:test by fierce");
             _log.Information("Information:test by fierce");
             _log.Fatal("Fatal:test by fierce");
             //RedisCache cache = new RedisCache();
-            
+
 
             return View();
         }

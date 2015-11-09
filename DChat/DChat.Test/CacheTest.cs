@@ -17,7 +17,7 @@ namespace DChat.Test
         [SetUp]
       public void  CacheTest2()
         {
-            Resolver.configure(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"config/unity.config"));
+            Resolver.Configure(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"config/unity.config"));
             _cache = Resolver.Current.Resolve<IRedisCache>();
         }
         [TestCase("name","zhangsan")]

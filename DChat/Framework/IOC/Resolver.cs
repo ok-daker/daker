@@ -26,7 +26,7 @@ namespace DChat.Framework.IOC
             }
 
         }
-        public static void configure(string path)
+        public static void Configure(string path)
         {
             _configpath = path;
         }
@@ -34,8 +34,11 @@ namespace DChat.Framework.IOC
         {
             get
             {
+                if (_container == null)
+                {
+                    _container = new UnityContainer();
+                }
 
-                _container = new UnityContainer();
                 // IUnityContainer unityContainer = HttpContext.Current.Items[(object)"perRequestContainer"] as IUnityContainer;
                 return _container;
 

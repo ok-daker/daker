@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Unity.Mvc5;
 
 namespace DChat.Web
 {
@@ -13,7 +14,8 @@ namespace DChat.Web
     {
         protected void Application_Start()
         {
-            Resolver.configure(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config/unity.config"));
+            Resolver.Configure(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config/unity.config"));
+            DependencyResolver.SetResolver(new UnityDependencyResolver(Resolver.Current.Container));
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
