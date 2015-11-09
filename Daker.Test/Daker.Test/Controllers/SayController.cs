@@ -18,13 +18,13 @@ namespace Daker.Test.Controllers
         {
             return Content("):--hahha");
         }
-            public ActionResult Hi()
+        public ActionResult Hi()
         {
             return Content("Hi-hi");
         }
-            public ActionResult Wind()
-            {
-                return Content("abc-at-home");
-            }
+        public ActionResult Wind()
+        {
+            return Content("hu~~~");
+        }
 	}
 }

@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -76,10 +80,12 @@
     <Compile Include="Cache\RedisCache.cs" />
     <Compile Include="Cache\RedisConfig.cs" />
     <Compile Include="IOC\Resolver.cs" />
+    <Compile Include="Log\ILogger.cs" />
+    <Compile Include="Log\Log4NetLogger.cs" />
+    <Compile Include="Log\LoggerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Log\" />
     <Folder Include="Security\" />
     <Folder Include="Unity\" />
   </ItemGroup>
