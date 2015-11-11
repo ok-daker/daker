@@ -26,8 +26,6 @@ namespace DChat.Web.Controllers
             _log.Information("Information:test by fierce");
             _log.Fatal("Fatal:test by fierce");
             //RedisCache cache = new RedisCache();
-
-
             return View();
         }
     }
