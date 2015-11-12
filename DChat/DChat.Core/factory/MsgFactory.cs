@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 
 namespace DChat.Core.factory
 {
-   public class MsgFactory
+    public class MsgFactory
     {
-       public IMsgHander GetHander();
-       public IMsgSender GetSender();
-       public IReceiver GetReceiver();
+        public IMsgHander GetHander() 
+        { return null; }
+        public IMsgSender GetSender()
+        { return null; }
+        public IReceiver GetReceiver()
+        { return null; }
     }
 }
