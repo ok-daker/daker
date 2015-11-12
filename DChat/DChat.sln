@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DChat.DataAccess.EF", "Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DChat.Test", "DChat.Test\DChat.Test.csproj", "{D9C365F1-6D66-46D3-9E07-D63763FB80B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DChat.Core", "DChat.Core\DChat.Core.csproj", "{9527D81E-CBD6-4276-A580-15068A96382A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DChat.Model", "DChat.Model\DChat.Model.csproj", "{79ACFB7E-4743-473F-B87D-8A49BAA76F54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +63,14 @@ Global
 		{D9C365F1-6D66-46D3-9E07-D63763FB80B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9C365F1-6D66-46D3-9E07-D63763FB80B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9C365F1-6D66-46D3-9E07-D63763FB80B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9527D81E-CBD6-4276-A580-15068A96382A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9527D81E-CBD6-4276-A580-15068A96382A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9527D81E-CBD6-4276-A580-15068A96382A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9527D81E-CBD6-4276-A580-15068A96382A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79ACFB7E-4743-473F-B87D-8A49BAA76F54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79ACFB7E-4743-473F-B87D-8A49BAA76F54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79ACFB7E-4743-473F-B87D-8A49BAA76F54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79ACFB7E-4743-473F-B87D-8A49BAA76F54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
