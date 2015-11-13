@@ -59,11 +59,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChatContext.cs" />
-    <Compile Include="MsgItem.cs" />
-    <Compile Include="MsgItemMap.cs" />
+    <Compile Include="Entity\MsgItem.cs" />
+    <Compile Include="EntityMap\MsgItemMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserInfo.cs" />
-    <Compile Include="UserInfoMap.cs" />
+    <Compile Include="Entity\UserInfo.cs" />
+    <Compile Include="EntityMap\UserInfoMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
