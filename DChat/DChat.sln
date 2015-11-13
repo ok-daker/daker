@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DChat.Web", "DChat.Web\DCha
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{578EE060-198D-4C9B-9B8B-5A0DEBA734C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DChat.Api", "DChat.Api\DChat.Api.csproj", "{C55B8BE4-A9D6-4346-BF5A-A4501E768787}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DChat.Framework", "Framework\DChat.Framework.csproj", "{1DA6D5B3-61CC-4D99-B17E-329B8D6322A0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DChat.Service", "Service\DChat.Service.csproj", "{9AE1C0C0-C35D-4677-9C47-D2E36D4D09D6}"
@@ -25,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DChat.Core", "DChat.Core\DC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DChat.Model", "DChat.Model\DChat.Model.csproj", "{79ACFB7E-4743-473F-B87D-8A49BAA76F54}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DChat.WebApi", "DChat.WebApi\DChat.WebApi.csproj", "{BDD6D189-B477-4BCC-8AF5-C898502DE973}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +35,6 @@ Global
 		{045F2A38-EF56-4D0F-A876-26E6EA3CF816}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{045F2A38-EF56-4D0F-A876-26E6EA3CF816}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{045F2A38-EF56-4D0F-A876-26E6EA3CF816}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C55B8BE4-A9D6-4346-BF5A-A4501E768787}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C55B8BE4-A9D6-4346-BF5A-A4501E768787}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C55B8BE4-A9D6-4346-BF5A-A4501E768787}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C55B8BE4-A9D6-4346-BF5A-A4501E768787}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1DA6D5B3-61CC-4D99-B17E-329B8D6322A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1DA6D5B3-61CC-4D99-B17E-329B8D6322A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DA6D5B3-61CC-4D99-B17E-329B8D6322A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -71,12 +67,16 @@ Global
 		{79ACFB7E-4743-473F-B87D-8A49BAA76F54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79ACFB7E-4743-473F-B87D-8A49BAA76F54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79ACFB7E-4743-473F-B87D-8A49BAA76F54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDD6D189-B477-4BCC-8AF5-C898502DE973}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDD6D189-B477-4BCC-8AF5-C898502DE973}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDD6D189-B477-4BCC-8AF5-C898502DE973}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDD6D189-B477-4BCC-8AF5-C898502DE973}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{045F2A38-EF56-4D0F-A876-26E6EA3CF816} = {578EE060-198D-4C9B-9B8B-5A0DEBA734C4}
-		{C55B8BE4-A9D6-4346-BF5A-A4501E768787} = {578EE060-198D-4C9B-9B8B-5A0DEBA734C4}
+		{BDD6D189-B477-4BCC-8AF5-C898502DE973} = {578EE060-198D-4C9B-9B8B-5A0DEBA734C4}
 	EndGlobalSection
 EndGlobal

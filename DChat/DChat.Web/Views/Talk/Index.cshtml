@@ -57,138 +57,155 @@
 </html>
 <script src="~/Scripts/jquery-2.1.4.min.js"></script>
 <script>
-    (function (window, document, $) {
-        var dChat = {
-            config: {
-                maxMsgLength: 100,
-                maxExistDom: 10,
-                requestTimeout: 5,
-                waitTimeout: 3,
-            },
-            user: {
-                NickName: "ZS"
+
+
+    var dChat = {
+        config: {
+            maxMsgLength: 100,
+            maxExistDom: 10,
+            requestTimeout: 5,
+            waitTimeout: 3,
+        },
+        Index: 0,
+        tempIndex: 0,
+        user: {
+            NickName: "ZS"
+        }
+        ,
+        initial: function (dom, user, msgs) {
+            if (!dom) {
+                throw new DOMException("dom not exist");
             }
-            ,
-            initial: function (dom, user, msgs) {
-                if (!dom) {
-                    throw new DOMException("dom not exist");
+            var usr = dChat.getUser(user);
+            dChat.user = usr;
+            this.get();
+            setInterval("CircleGet()", 1500, null);
+        }
+        ,
+
+        get: function () {
+            $.ajax(
+               {
+                   url: 'http://localhost:53432/Message/get?id=' + dChat.Index,
+                   type: 'get',
+                   datatype: 'jsonp',
+                   jsonp: 'callback',
+                   //  timeout: dChat.config.waitTimeout,
+                   success: function (data) {
+                       var jsondata = data;
+                       dChat.Index = jsondata.Index;
+                       msdata = jsondata.Data;
+                       dChat.popMsgs(msdata, false);
+                   },
+                   error: function () {
+
+                   },
+                   complete: function () {
+
+                   }
+               }
+
+                )
+        },
+        TestGet: function () {
+            var x = Math.random();
+            var waittime = x < 0.5 ? 2 : x * 5;
+            dChat.send(waittime.toString(), false)
+            setTimeout(dChat.TestGet, waittime * 1000);
+
+        }
+
+        ,
+        send: function (msg, left) {
+            $.ajax({
+                url: 'http://localhost:53432/Message/push?value='+msg,
+                data:{value:msg},
+                type: "post",
+                //contenttype:"application/json",
+                datatype: 'jsonp',
+                jsonp: 'callback'
+            });
+            dChat.popMsgs(msg, true);
+
+
+        },
+        popMsgs: function (msg, left) {
+            if (msg instanceof Array) {
+                for (var i = 0; i < msg.length; i++) {
+                    if (dChat.checkMsg(msg[i])) {
+                      ms=msg[i].replace("value=", "");
+                        dChat.popMsg(ms, left);
+                    }
+
                 }
-                var usr = dChat.checker.getUser(user);
-                dChat.user = usr;
-                dChat.getter.TestGet();
+            }
+            else if (dChat.checkMsg(msg)) {
+                dChat.popMsg(msg, left);
+            }
+        }
+        ,
+        popMsg: function (ms, isright) {
+            var msg = decodeURI(ms);
+            if (isright) {
+                var msbody = $("<div>").addClass("right").append($("<div>").addClass("mscontent").text(msg)).append($("<div>").addClass("head").append($("<img>").attr("src", "../images/1.jpg")));
+                $(".msg-list").append(msbody);
+            } else {
+                var msbody = $("<div>").addClass("left").append($("<div>").addClass("head").append($("<img>").attr("src", "../images/1.jpg")).append($("<div>").addClass("nickname").text(dChat.user.NickName))).append($("<div>").addClass("mscontent").text(msg));
+                $(".msg-list").append(msbody);
 
             }
-            ,
-            getter: {
 
-                get: function () {
-                    $.ajax(
-                       {
-                           url: 'history',
-                           type: 'get',
-                           timeout: dChat.config.waitTimeout,
-                           success: function (data) {
-                               var jsondata = data;
-                               dChat.sender.send(data, true);
-                           },
-                           error: function () {
+            if ($(".msg-list>.left,.msg-list>.right").length > dChat.config.maxExistDom) {
+                var rmIndex = $(".msg-list>.left,.msg-list>.right").length - dChat.config.maxExistDom;
+                var extraDoms = $(".msg-list>.left,.msg-list>.right:lt(" + rmIndex + ")");
+                extraDoms.remove();
+            }
+            var height = $(".msg-list").get(0).scrollHeight;
+            $(".msg-list").animate({ scrollTop: height }, 800);
 
-                           },
-                           complete: function () {
-                               //setTimeout(dChat.getter.get, dChat.config.requestTimeout)
-                           }
-                       }
+        }
+        ,
+        checkMsg: function (msg) {
+            if (!msg || msg.length > dChat.config.maxMsgLength) {
+                return false;
+            }
+            return true;
 
-                        )
-                },
-                TestGet: function () {
-                    var x = Math.random();
-                    var waittime = x < 0.5 ? 2 : x * 5;
-                    dChat.sender.send(waittime.toString(), false)
-                    setTimeout(dChat.getter.TestGet, waittime * 1000);
-
+        },
+        getUser: function (user) {
+            if (!user || !("Name" in user)) {
+                return {
+                    Name: "匿名用户",
+                    ID: "",
                 }
             }
-            ,
-            sender:
-            {
-                send: function (msg, left) {
-                    if (msg instanceof Array) {
-                        for (var i = 0; i < msg.length; i++) {
-                            if (dChat.checker.checkMsg(msg[i])) {
-                                dChat.sender.popMsg(msg, left);
-                            }
 
-                        }
-                    }
-                    else if (dChat.checker.checkMsg(msg)) {
-                        dChat.sender.popMsg(msg, left);
-                    }
-                },
-                popMsg: function (msg, isright) {
-                    if (isright) {
-                        var msbody = $("<div>").addClass("right").append($("<div>").addClass("mscontent").text(msg)).append($("<div>").addClass("head").append($("<img>").attr("src", "../images/1.jpg")));
-                        $(".msg-list").append(msbody);
-                    } else {
-                        var msbody = $("<div>").addClass("left").append($("<div>").addClass("head").append($("<img>").attr("src", "../images/1.jpg")).append($("<div>").addClass("nickname").text(dChat.user.NickName))).append($("<div>").addClass("mscontent").text(msg));
-                        $(".msg-list").append(msbody);
+        }
 
-                    }
-                    $(".typearea .msg").val("");
-                    if ($(".msg-list>.left,.msg-list>.right").length > dChat.config.maxExistDom) {
-                        var rmIndex = $(".msg-list>.left,.msg-list>.right").length - dChat.config.maxExistDom;
-                        var extraDoms = $(".msg-list>.left,.msg-list>.right:lt(" + rmIndex + ")");
-                        extraDoms.remove();
-                    }
-                    var height = $(".msg-list").get(0).scrollHeight;
-                    $(".msg-list").animate({ scrollTop: height }, 800);
 
-                }
-            },
-            checker: {
-                checkMsg: function (msg) {
-                    if (!msg || msg.length > dChat.config.maxMsgLength) {
-                        return false;
-                    }
-                    return true;
+    };
+    function sendMsg() {
 
-                },
-                getUser: function (user) {
-                    if (!user || !("Name" in user)) {
-                        return {
-                            Name: "匿名用户",
-                            ID: "",
-                        }
-                    }
-
-                }
-
-            },
-            dialog:
-                {
-                    alert: function (msg) {
-                        alert(msg);
-                    }
-
-                }
-
-        };
-        function sendMsg() {
-
-            var msg = $(".typearea .msg").val();
-            dChat.sender.send(msg, true);
-        };
-        $(".sendbtn").click(function () {
+        var msg = $(".typearea .msg").val();
+        $(".typearea .msg").val("");
+        dChat.send(msg, true);
+    };
+    $(".sendbtn").click(function () {
+        sendMsg();
+    });
+    $(document).keydown(function (event) {
+        if (event.ctrlKey && event.keyCode == 13) {
             sendMsg();
-        });
-        $(document).keydown(function (event) {
-            if (event.ctrlKey && event.keyCode == 13) {
-                sendMsg();
-            }
-        });
-        dChat.initial($(".msg-list"), { NickName: "Zh-cn" });
+        }
+    });
+    function CircleGet() {
+        dChat.get();
 
-    })(window, document, jQuery);
+
+    }
+    dChat.initial($(".msg-list"), { NickName: "Zh-cn" });
+
+
 
 </script>
 <script>
