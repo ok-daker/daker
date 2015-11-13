@@ -11,7 +11,7 @@ namespace DChat.DataAccess.EF
     {
         public UserInfoMap()
         {
-            this.ToTable("UserInfo");
+            this.ToTable("User_Info");
             this.HasKey(u=>u.Id);
         }
     }

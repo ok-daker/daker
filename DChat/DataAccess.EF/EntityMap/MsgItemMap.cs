@@ -11,7 +11,7 @@ namespace DChat.DataAccess.EF
     {
         public MsgItemMap()
         {
-            this.ToTable("MsgItem");
+            this.ToTable("Msg_Item");
             this.HasKey(m=>m.Id);
         }
     }
