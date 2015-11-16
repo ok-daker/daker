@@ -22,13 +22,14 @@ namespace DChat.DataAccess.EF
             this.Property(m => m.UserId).HasColumnName("user_id");
             this.Property(m => m.UserId).HasColumnType("int");
 
-            this.Property(m => m.ParentId).HasColumnName("parent_id");
+            //this.Property(m => m.ParentId).HasColumnName("parent_id");
 
             this.Property(m => m.MsgContent).HasColumnName("msg_content");
             this.Property(m => m.MsgContent).HasColumnType("longtext");
 
             //this.Property(m => m.IsDeleted).HasColumnName("is_deleted");
             //this.Property(m => m.IsDeleted).HasColumnType("bit");
+            this.HasOptional(c => c.Next).WithOptionalPrincipal(d => d.Pre).Map(k => { k.MapKey("parent_id"); });
 
         }
     }

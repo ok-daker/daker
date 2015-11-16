@@ -12,10 +12,10 @@ namespace DChat.DataAccess.EF
         public ChatDbContext()
             : base("name=Chat")
         {
-            this.Configuration.AutoDetectChangesEnabled = true;
+           // this.Configuration.AutoDetectChangesEnabled = true;
         }
-        public DbSet<UserInfo> UserInfo { get; set; }
-        public DbSet<MsgItem> MsgItem { get; set; }
+        public DbSet<UserInfo> UserInfos { get; set; }
+        public DbSet<MsgItem> MsgItems { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -11,15 +11,14 @@ namespace DChat.DataAccess.EF
     {
         public Guid Id { get; set; }
         public int UserId { get; set; }
-        public Guid ParentId { get; set; }
+        //public Guid ParentId { get; set; }
         public string MsgContent { get; set; }
         public DateTime SendTime { get; set; }
-        [NotMapped]
-        public MsgItem Next
-        {
 
-            get { return null; }
-        }
+        public virtual MsgItem Next { get; set; }
+
+        public virtual MsgItem Pre { get; set; }
+
         [NotMapped]
         public IList<MsgItem> NextAll
         {
