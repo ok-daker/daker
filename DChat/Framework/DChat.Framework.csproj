@@ -84,10 +84,9 @@
     <Compile Include="Log\LoggerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\MD5Helper.cs" />
+    <Compile Include="Unity\IDHelper.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Unity\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
