@@ -20,6 +20,6 @@ namespace DChat.DataAccess.EF
         public bool IsDeleted { get; set; }
         public string Remarks { get; set; }
 
-        public virtual ICollection<MsgItem> MsgItem { get; set; }
+        
     }
 }

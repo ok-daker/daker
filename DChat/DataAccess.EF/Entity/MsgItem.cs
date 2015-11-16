@@ -13,6 +13,6 @@ namespace DChat.DataAccess.EF
         public Guid ParentId { get; set; }
         public string MsgContent { get; set; }
         public DateTime SendTime { get; set;}
-        public bool IsDeleted { get; set; }
+        //public bool IsDeleted { get; set; }
     }
 }
