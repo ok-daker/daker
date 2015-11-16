@@ -14,13 +14,14 @@
     .msg-list .right .mscontent { position: relative; right: 5px; top: 5px; }
     body { background-color: #2E2E2E; }
     .body { background: -webkit-linear-gradient(left top, #323131, #2E2E2E); /* Safari 5.1 - 6.0 */ background: -o-linear-gradient(bottom right,#323131, #2E2E2E); /* Opera 11.1 - 12.0 */ background: -moz-linear-gradient(bottom right,#323131, #2E2E2E); /* Firefox 3.6 - 15 */ background: linear-gradient(to bottom right, #323131, #2E2E2E); /* 标准的语法 */ }
-    .msg-list { background-color: white; padding: 5px; color: #666; font-size: 14px; font-family: "微软雅黑"; height: 400px; position: relative; overflow: scroll; }
-    .msg { background: #fff; border: 1px solid rgba(219, 20, 20, 0.97); padding: 5px; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; width: 260px; background-color: #2B2A2A; background: white; margin: 2px; font-family: "微软雅黑"; line-height: 20px; }
+    .msg-list { background-color: white; padding: 5px; color: #666; font-size: 14px; font-family: "微软雅黑"; height: 400px; position: relative; overflow-x: hidden; overflow-y: auto; }
+    .msg { background: #fff; border: 1px solid rgba(219, 20, 20, 0.97); padding: 5px; -ms-border-radius: 15px; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; width: 260px; background-color: #2B2A2A; background: white; margin: 2px; font-family: "微软雅黑"; line-height: 20px; margin-left: 2%; width: 70%; }
+
     .typearea { margin: 5px; }
-        .typearea > div { display: inline-block; }
-        .typearea .sendbtn { position: relative; cursor: default; color: rgb(26, 25, 25); }
-            .typearea .sendbtn .icon { width: 40px; height: 30px; }
-            .typearea .sendbtn .text { font-size: 5px; /* margin-left: -25px; */ position: absolute; left: 10px; top: 2px; }
+        .typearea > div { }
+        .typearea .sendbtn { position: relative; cursor: default; color: rgb(26, 25, 25); margin-left: 1%; }
+            .typearea .sendbtn .icon { width: 47px; height: 36px; }
+            .typearea .sendbtn .text { font-size: 5px; /* margin-left: -25px; */ position: absolute; left: 13px; top: 2px; }
 </style>
 <html>
 <head>
@@ -49,7 +50,7 @@
             </div>
         </div>
         <div class="typearea">
-            <div style="border:none;width:60%"><input type="text" class="msg" placeholder="输入..." /> </div><div><a class="sendbtn"><span class="icono-disqus icon"></span> <span class="text">发送</span> </a></div>
+            <div style="border:none;"><input type="text" class="msg" placeholder="输入..." /><a class="sendbtn"><span class="icono-disqus icon"></span> <span class="text">发送</span> </a> </div><div></div>
         </div>
 
     </div>
@@ -118,8 +119,8 @@
         ,
         send: function (msg, left) {
             $.ajax({
-                url: 'http://localhost:53432/Message/push?value='+msg,
-                data:{value:msg},
+                url: 'http://localhost:53432/Message/push?value=' + msg,
+                data: { value: msg },
                 type: "post",
                 //contenttype:"application/json",
                 datatype: 'jsonp',
@@ -133,7 +134,7 @@
             if (msg instanceof Array) {
                 for (var i = 0; i < msg.length; i++) {
                     if (dChat.checkMsg(msg[i])) {
-                      ms=msg[i].replace("value=", "");
+                        ms = msg[i].replace("value=", "");
                         dChat.popMsg(ms, left);
                     }
 

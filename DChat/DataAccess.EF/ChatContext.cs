@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace DChat.DataAccess.EF
 {
-    public class ChatDbContext:DbContext
+    public class ChatDbContext : DbContext
     {
-        public ChatDbContext() : base("name=Chat")
+        public ChatDbContext()
+            : base("name=Chat")
         {
-            
+            this.Configuration.AutoDetectChangesEnabled = true;
         }
         public DbSet<UserInfo> UserInfo { get; set; }
         public DbSet<MsgItem> MsgItem { get; set; }
