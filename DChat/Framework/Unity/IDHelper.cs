@@ -29,7 +29,7 @@ namespace DChat.Framework.Unity
             }
         }
         /// <summary>
-        /// 获取历史ID:数据库中获取
+        /// 获取上一条消息记录:数据库中获取
         /// </summary>
         /// <returns></returns>
         public static MsgItem GetPreItem()
