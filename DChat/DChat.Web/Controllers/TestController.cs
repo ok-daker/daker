@@ -13,9 +13,10 @@ namespace DChat.Web.Controllers
         private readonly ILogger _log;
         private readonly IRedisCache _cache;
         
-        public TestController(ILogger log)
+        public TestController(ILogger log,IRedisCache cache)
         {
             _log = log;
+            _cache = cache;
         }
         // GET: Test
         public ActionResult Index()
@@ -26,6 +27,9 @@ namespace DChat.Web.Controllers
             _log.Information("Information:test by fierce");
             _log.Fatal("Fatal:test by fierce");
             //RedisCache cache = new RedisCache();
+            //_cache.Add("test1",new string[] { "111","222"});
+            ViewBag.Test1 = _cache.Get<string[]>("test1");
+
             return View();
         }
     }

@@ -15,7 +15,7 @@ namespace DChat.DataAccess.EF
             this.ToTable("User_Info");
             //主键
             this.HasKey(u=>u.Id);
-            //字段类型  名称
+            //字段类型  名称 是否可空等属性
 
             this.Property(m => m.Name).HasColumnName("name");
             this.Property(m => m.Name).HasColumnType("varchar");
