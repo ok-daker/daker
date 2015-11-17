@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DChat.Model.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Permissions;
@@ -6,41 +7,34 @@ using System.Text;
 using System.Threading.Tasks;
 namespace DChat.Framework.Unity
 {
-    public class IDPair
-    {
-        public Guid ParentID { get; set; }
-        public Guid Msg_ID { get; set; }
-    }
-
+    
     public static class IDHelper
     {
-        private static object _root = new object();
-        private static Guid   _parentId;
-        private static Guid _currentId;
+        private static object _root = new object();        
+        public static MsgItem _preMsgItem;
 
         static IDHelper()
         {
-            _parentId = GetHistoryID();
+            _preMsgItem = GetPreItem();
         }
 
-        public static IDPair GetIDPair()
+        public static MsgItem GetMsgItem(MsgItem msgItem)
         {
             lock (_root)
             {
-                _parentId = _currentId;
-                _currentId = Guid.NewGuid();
-                return new IDPair() { Msg_ID = _currentId, ParentID = _parentId };
+                msgItem.Id = Guid.NewGuid();
+                msgItem.Pre = _preMsgItem;
+                _preMsgItem = msgItem;
+                return msgItem;
             }
-
-
         }
         /// <summary>
         /// 获取历史ID:数据库中获取
         /// </summary>
         /// <returns></returns>
-        public static Guid GetHistoryID()
+        public static MsgItem GetPreItem()
         {
-            return Guid.Parse("ef5b6cbe-31af-431a-9a19-eb3a72393360");
+            return new MsgItem { };
         }
     }
 }
