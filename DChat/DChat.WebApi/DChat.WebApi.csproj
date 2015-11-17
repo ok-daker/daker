@@ -89,6 +89,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="config\Log4Net.config" />
+    <Content Include="config\redis.config" />
+    <Content Include="config\unity - 复制.config" />
+    <Content Include="config\unity.config" />
     <None Include="Properties\PublishProfiles\config.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

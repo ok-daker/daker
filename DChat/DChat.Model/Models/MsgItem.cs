@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DChat.DataAccess.EF
+namespace DChat.Model.Models
 {
     public class MsgItem
     {
@@ -19,7 +18,6 @@ namespace DChat.DataAccess.EF
 
         public virtual MsgItem Pre { get; set; }
 
-        [NotMapped]
         public IList<MsgItem> NextAll
         {
 

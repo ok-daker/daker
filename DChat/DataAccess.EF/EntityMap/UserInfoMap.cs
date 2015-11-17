@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DChat.Model.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
@@ -7,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace DChat.DataAccess.EF
 {
-    public class UserInfoMap:EntityTypeConfiguration<UserInfo>
+    public class UserInfoMap : EntityTypeConfiguration<UserInfo>
     {
         public UserInfoMap()
         {
             //表名
             this.ToTable("User_Info");
             //主键
-            this.HasKey(u=>u.Id);
+            this.HasKey(u => u.Id);
             //字段类型  名称 是否可空等属性
 
             this.Property(m => m.Name).HasColumnName("name");

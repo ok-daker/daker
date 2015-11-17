@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DChat.Model.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;

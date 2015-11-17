@@ -86,7 +86,12 @@
     <Compile Include="Security\MD5Helper.cs" />
     <Compile Include="Unity\IDHelper.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DChat.Model\DChat.Model.csproj">
+      <Project>{79acfb7e-4743-473f-b87d-8a49baa76f54}</Project>
+      <Name>DChat.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

@@ -232,6 +232,10 @@
       <Project>{f676b21d-99ee-452c-a452-f8aa6448f0e0}</Project>
       <Name>DChat.DataAccess.EF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DChat.Model\DChat.Model.csproj">
+      <Project>{79acfb7e-4743-473f-b87d-8a49baa76f54}</Project>
+      <Name>DChat.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Framework\DChat.Framework.csproj">
       <Project>{1da6d5b3-61cc-4d99-b17e-329b8d6322a0}</Project>
       <Name>DChat.Framework</Name>

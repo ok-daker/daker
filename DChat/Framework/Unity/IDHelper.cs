@@ -4,7 +4,6 @@ using System.Linq;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace DChat.Framework.Unity
 {
     public class IDPair
@@ -16,7 +15,7 @@ namespace DChat.Framework.Unity
     public static class IDHelper
     {
         private static object _root = new object();
-        private static Guid _parentId;
+        private static Guid   _parentId;
         private static Guid _currentId;
 
         static IDHelper()

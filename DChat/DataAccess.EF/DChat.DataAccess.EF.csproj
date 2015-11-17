@@ -59,15 +59,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChatContext.cs" />
-    <Compile Include="Entity\MsgItem.cs" />
     <Compile Include="EntityMap\MsgItemMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entity\UserInfo.cs" />
     <Compile Include="EntityMap\UserInfoMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DChat.Model\DChat.Model.csproj">
+      <Project>{79acfb7e-4743-473f-b87d-8a49baa76f54}</Project>
+      <Name>DChat.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

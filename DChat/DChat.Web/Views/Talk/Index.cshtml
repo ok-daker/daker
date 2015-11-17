@@ -93,7 +93,7 @@
         TestGet: function () {
             var x = Math.random();
             var waittime = x < 0.5 ? 2 : x * 5;
-            dChat.send(waittime.toString(), false)
+            dChat.send(waittime.toString(), false);
             setTimeout(dChat.TestGet, waittime * 1000);
 
         }
