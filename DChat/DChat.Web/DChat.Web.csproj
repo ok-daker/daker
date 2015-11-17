@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -98,6 +101,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
@@ -124,14 +130,31 @@
     <Reference Include="Unity.Mvc5">
       <HintPath>..\packages\Unity.Mvc5.1.2.3\lib\net45\Unity.Mvc5.dll</HintPath>
     </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\index.css" />
     <Content Include="Content\icono.min.css" />
+    <Content Include="Content\images\ajax-loader.gif" />
+    <Content Include="Content\images\ajax-loader.png" />
+    <Content Include="Content\images\icons-18-black.png" />
+    <Content Include="Content\images\icons-18-white.png" />
+    <Content Include="Content\images\icons-36-black.png" />
+    <Content Include="Content\images\icons-36-white.png" />
+    <Content Include="Content\jquery.mobile-1.1.2.css" />
+    <Content Include="Content\jquery.mobile-1.1.2.min.css" />
+    <Content Include="Content\jquery.mobile.structure-1.1.2.css" />
+    <Content Include="Content\jquery.mobile.structure-1.1.2.min.css" />
+    <Content Include="Content\jquery.mobile.theme-1.1.2.css" />
+    <Content Include="Content\jquery.mobile.theme-1.1.2.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\Site.Mobile.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -158,6 +181,8 @@
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.mobile-1.1.2.js" />
+    <Content Include="Scripts\jquery.mobile-1.1.2.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -166,11 +191,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\BundleMobileConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TalkController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\ViewSwitcherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -186,6 +213,9 @@
     <Content Include="Views\home\talk.cshtml" />
     <Content Include="Views\home\Index.cshtml" />
     <Content Include="Views\Talk\Index.cshtml" />
+    <Content Include="Views\Talk\Index.Mobile.cshtml" />
+    <Content Include="Views\Shared\_ViewSwitcher.cshtml" />
+    <Content Include="Views\Shared\_Layout.Mobile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

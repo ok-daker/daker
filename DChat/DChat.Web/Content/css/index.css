@@ -1,0 +1,22 @@
+﻿html { height: 100%; }
+body { height: 100%; }
+.enviroment-big { width: 40%; margin-left: 30%; text-align: center; height: 100%; margin-top: 0;margin-bottom: 0; padding: 0; }
+.enviroment-small { width: 100%; padding: 5px; text-align: center; height: 100%; margin: 0; padding: 0; }
+.mscontent { background: #CDD7E2; padding: 8px; max-width: 50%; border-radius: 5px; display: inline-block; clear: both; vertical-align: text-top; word-break: break-all; }
+.head { display: inline-block; }
+    .head img { width: 30px; height: 30px; }
+    .head .nickname { display: inline-block; height: 10px; font-size: 12px; vertical-align: top; padding: 3px; }
+.msg-list .left { position: relative; width: 300px; text-align: left; float: left; clear: both; margin-top: 20px; margin-bottom: 20px; }
+.msg-list .right { position: relative; width: 300px; text-align: right; float: right; clear: both; margin-top: 20px; margin-bottom: 20px; }
+.msg-list .left .mscontent { position: relative; left: -15px; top: 15px; }
+.msg-list .right .mscontent { position: relative; right: 5px; top: 5px; }
+body { background-color: #2E2E2E; }
+.body { background: -webkit-linear-gradient(left top, #323131, #2E2E2E); /* Safari 5.1 - 6.0 */ background: -o-linear-gradient(bottom right,#323131, #2E2E2E); /* Opera 11.1 - 12.0 */ background: -moz-linear-gradient(bottom right,#323131, #2E2E2E); /* Firefox 3.6 - 15 */ background: linear-gradient(to bottom right, #323131, #2E2E2E); /* 标准的语法 */ }
+.msg-list { background-color: white; padding: 5px; color: #666; font-size: 14px; font-family: "微软雅黑"; height: 80%; position: relative; overflow-x: hidden; overflow-y: auto; }
+.msg { background: #fff; border: 1px solid rgba(219, 20, 20, 0.97); padding: 5px; -ms-border-radius: 15px; -ms-border-radius: 50%; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; width: 260px; background-color: #2B2A2A; background: white; margin: 2px; font-family: "微软雅黑"; line-height: 20px; margin-left: 2%; width: 70%; }
+.typearea { margin: 5px; text-align: center; }
+    .typearea > div { }
+    .typearea .sendbtn { position: relative; cursor: default; color: rgb(26, 25, 25); margin-left: 1%; }
+        .typearea .sendbtn .icon { width: 42px; height: 33px; background-color: #ddd; display: inline-block; -ms-border-radius: 50%; border-radius: 50%; vertical-align: middle; }
+
+        .typearea .sendbtn .text { font-size: 12px; /* margin-left: -25px; */ position: absolute; left: 8px; top: 3px; }

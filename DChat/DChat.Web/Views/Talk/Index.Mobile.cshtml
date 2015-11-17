@@ -5,14 +5,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <meta name="viewport" content="width=device-width;initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="Iphone-content" content="320" />
+    <meta name="format-detection" content="telephone =no" />
     <link href="~/Content/css/index.css" rel="stylesheet" />
-    @*<link href="~/content/icono.min.css" rel="stylesheet" />*@
+    <link href="~/content/icono.min.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width" />
-    <title>Daker</title>
+    <title>Daker-Mobile</title>
 </head>
 <body>
-    <div id="container" class="enviroment-big">
+    <div id="container" class="enviroment-small">
         <div class="msg-list">
             <div class="left">
                 <div class="head">
@@ -129,11 +132,12 @@
         ,
         popMsg: function (ms, isright) {
             var msg = decodeURI(ms);
+            var msbody;
             if (isright) {
-                var msbody = $("<div>").addClass("right").append($("<div>").addClass("mscontent").text(msg)).append($("<div>").addClass("head").append($("<img>").attr("src", "../images/1.jpg")));
+                msbody = $("<div>").addClass("right").append($("<div>").addClass("mscontent").text(msg)).append($("<div>").addClass("head").append($("<img>").attr("src", "../images/1.jpg")));
                 $(".msg-list").append(msbody);
             } else {
-                var msbody = $("<div>").addClass("left").append($("<div>").addClass("head").append($("<img>").attr("src", "../images/1.jpg")).append($("<div>").addClass("nickname").text(dChat.user.NickName))).append($("<div>").addClass("mscontent").text(msg));
+                msbody = $("<div>").addClass("left").append($("<div>").addClass("head").append($("<img>").attr("src", "../images/1.jpg")).append($("<div>").addClass("nickname").text(dChat.user.NickName))).append($("<div>").addClass("mscontent").text(msg));
                 $(".msg-list").append(msbody);
 
             }
