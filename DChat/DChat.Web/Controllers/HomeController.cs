@@ -22,6 +22,7 @@ namespace DChat.Web.Controllers
             //创建表 且将字段加入
             UserInfo userInfo = new UserInfo();
             userInfo.Name = "windfierce";
+
             //将表加入数据库
             db.UserInfos.Add(userInfo);
             MsgItem msg = new MsgItem
