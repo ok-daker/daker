@@ -1,4 +1,4 @@
-﻿using DChat.DataAccess.EF;
+﻿using DChat.DataAccess;
 using DChat.Model.Models;
 using System;
 using System.Collections.Generic;

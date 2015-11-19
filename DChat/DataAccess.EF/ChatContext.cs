@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DChat.DataAccess.EF
+namespace DChat.DataAccess
 {
     public class ChatDbContext : DbContext
     {

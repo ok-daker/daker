@@ -7,8 +7,8 @@
     <ProjectGuid>{F676B21D-99EE-452C-A452-F8AA6448F0E0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DChat.DataAccess.EF</RootNamespace>
-    <AssemblyName>DChat.DataAccess.EF</AssemblyName>
+    <RootNamespace>DChat.DataAccess</RootNamespace>
+    <AssemblyName>DChat.DataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

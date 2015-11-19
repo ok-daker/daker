@@ -6,7 +6,7 @@ using System.Security.Permissions;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-namespace DChat.DataAccess.EF
+namespace DChat.DataAccess
 {
     
     public static class MsgHelper
