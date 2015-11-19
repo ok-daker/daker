@@ -32,6 +32,7 @@ namespace DChat.WebApi.Controllers
         [Route("Get")]
         public dynamic Get(int id = 0)
         {
+            List<MsgItemDTO> msgDTO = new List<MsgItemDTO>();
             MsgItemDTO msg = new MsgItemDTO();
             msg.SendTime = DateTime.Now;
             msg.Id = Guid.NewGuid();
@@ -43,7 +44,21 @@ namespace DChat.WebApi.Controllers
                 NickName = "Lisa"
 
             };
-            return msg;
+
+            MsgItemDTO msg2 = new MsgItemDTO();
+            msg2.SendTime = DateTime.Now;
+            msg2.Id = Guid.NewGuid();
+            msg2.MsgContent = "哈哈哈，你也好";
+            msg2.UserId = 1;
+            msg2.Sender = new UserInfo()
+            {
+                HeadImgPath = "../images/1.jpg",
+                NickName = "Hane"
+
+            };
+            msgDTO.Add(msg);
+            msgDTO.Add(msg2);
+            return msgDTO;
         }
 
         // GET api/<controller>/5

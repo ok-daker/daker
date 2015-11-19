@@ -15,10 +15,10 @@ namespace DChat.Web.Controllers
         public ActionResult Index()
         {
             //创建上下文
-            ChatDbContext db = new ChatDbContext();
-            //创建数据库
-            //db.Database.CreateIfNotExists();
-            IEnumerable<MsgItem> list = db.MsgItems.ToList();
+            //ChatDbContext db = new ChatDbContext();
+            ////创建数据库
+            ////db.Database.CreateIfNotExists();
+            //IEnumerable<MsgItem> list = db.MsgItems.ToList();
 
 
             ////创建表 且将字段加入
@@ -50,7 +50,7 @@ namespace DChat.Web.Controllers
 
 
 
-            return View(list);
+            return View();
         }
 	}
 }
