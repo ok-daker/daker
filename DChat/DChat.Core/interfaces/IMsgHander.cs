@@ -1,28 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DChat.Model.Models;
 
 namespace DChat.Core.interfaces
 {
-    public interface IMsgHander
+    public interface IMsgHandler
     {
-        /// <summary>
-        /// 一般前置处理
-        /// </summary>
-        void Pre();
-        /// <summary>
-        /// 一般核心处理
-        /// </summary>
-        void Core();
-        /// <summary>
-        /// 一般未处理
-        /// </summary>
-        void Tail();
-        /// <summary>
-        /// 其他插件处理
-        /// </summary>
-        void Extra();
+        void Push(MsgItem msg);
+        IEnumerable<MsgItem> Get(Guid id);
     }
 }

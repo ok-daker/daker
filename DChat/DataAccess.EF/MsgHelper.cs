@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 namespace DChat.DataAccess.EF
 {
     
-    public static class IDHelper
+    public static class MsgHelper
     {
         private static object _root = new object();        
         public static MsgItem _preMsgItem;
         public static IEnumerable<MsgItem> _nextAllItem;
 
-        static IDHelper()
+        static MsgHelper()
         {
             _preMsgItem = GetPreItem();
         }

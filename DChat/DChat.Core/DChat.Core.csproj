@@ -39,20 +39,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="factory\MsgFactory.cs" />
+    <Compile Include="implement\MsgHandler.cs" />
     <Compile Include="interfaces\IMsgHander.cs" />
-    <Compile Include="interfaces\IMsgSender.cs" />
-    <Compile Include="interfaces\IReceiver.cs" />
     <Compile Include="iplugin\IPluginBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="implement\" />
+    <Folder Include="factory\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DChat.Model\DChat.Model.csproj">
       <Project>{79acfb7e-4743-473f-b87d-8a49baa76f54}</Project>
       <Name>DChat.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\DChat.Framework.csproj">
+      <Project>{1da6d5b3-61cc-4d99-b17e-329b8d6322a0}</Project>
+      <Name>DChat.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
