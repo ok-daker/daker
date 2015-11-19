@@ -75,10 +75,13 @@
                    jsonp: 'callback',
                    //  timeout: dChat.config.waitTimeout,
                    success: function (data) {
+                       data = [
+                           { MsgContent: "aaa", Id: "asadsadsdasdsaad", SendTime: new Date(), Sender: { Id: 1, Name: "张三", NickName: "Zhang-San", HeadImgPath: "../images/1.jpg" } },
+                           { MsgContent: "bbb", Id: "bbbb", SendTime: new Date(), Sender: { Id: 1, Name: "张si", NickName: "Zhang-Si", HeadImgPath: "../images/2.jpg" } }
+                       ];
                        var jsondata = data;
-                       dChat.Index = jsondata.Index;
-                       msdata = jsondata.Data;
-                       dChat.popMsgs(msdata, false);
+                       dChat.Index = jsondata.Id;
+                       dChat.popMsgs(data, false);
                    },
                    error: function () {
 
@@ -100,6 +103,7 @@
 
         ,
         send: function (msg, left) {
+            var msgObject = { MsgContent: msg, Sender: { HeadImgPath: '../images/1.jpg', NickName: 'Json' } }
             $.ajax({
                 url: 'http://localhost:53432/Message/push?value=' + msg,
                 data: { value: msg },
@@ -108,7 +112,7 @@
                 datatype: 'jsonp',
                 jsonp: 'callback'
             });
-            dChat.popMsgs(msg, true);
+            dChat.popMsgs(msgObject, true);
 
 
         },
@@ -116,8 +120,7 @@
             if (msg instanceof Array) {
                 for (var i = 0; i < msg.length; i++) {
                     if (dChat.checkMsg(msg[i])) {
-                        ms = msg[i].replace("value=", "");
-                        dChat.popMsg(ms, left);
+                        dChat.popMsg(msg[i], left);
                     }
 
                 }
@@ -127,23 +130,24 @@
             }
         }
         ,
-        popMsg: function (ms, isright) {
-            var msg = decodeURI(ms);
+        popMsg: function (data, isright) {
+            var msg = decodeURI(data.MsgContent);
+            var sender = data.Sender;
             if (isright) {
-                var msbody = $("<div>").addClass("right").append($("<div>").addClass("mscontent").text(msg)).append($("<div>").addClass("head").append($("<img>").attr("src", "../images/1.jpg")));
+                var msbody = $("<div>").addClass("right").append($("<div>").addClass("mscontent").text(msg)).append($("<div>").addClass("head").append($("<img>").attr("src", sender.HeadImgPath)));
                 $(".msg-list").append(msbody);
             } else {
-                var msbody = $("<div>").addClass("left").append($("<div>").addClass("head").append($("<img>").attr("src", "../images/1.jpg")).append($("<div>").addClass("nickname").text(dChat.user.NickName))).append($("<div>").addClass("mscontent").text(msg));
+                var msbody = $("<div>").addClass("left").append($("<div>").addClass("head").append($("<img>").attr("src", sender.HeadImgPath)).append($("<div>").addClass("nickname").text(sender.NickName))).append($("<div>").addClass("mscontent").text(msg));
                 $(".msg-list").append(msbody);
 
             }
-
             if ($(".msg-list>.left,.msg-list>.right").length > dChat.config.maxExistDom) {
                 var rmIndex = $(".msg-list>.left,.msg-list>.right").length - dChat.config.maxExistDom;
-                var extraDoms = $(".msg-list>.left,.msg-list>.right:lt(" + rmIndex + ")");
+                var extraDoms = $(".msg-list>div:lt(" + rmIndex + ")");
                 extraDoms.remove();
             }
             var height = $(".msg-list").get(0).scrollHeight;
+            HandleScroll();
             $(".msg-list").animate({ scrollTop: height }, 800);
 
         }
@@ -159,8 +163,21 @@
             if (!user || !("Name" in user)) {
                 return {
                     Name: "匿名用户",
-                    ID: "",
+                    ID: ""
                 }
+            }
+
+        },
+        PauseScroll: function () {
+
+        },
+        ScrollSate: { WaiteTime: 2, InPause: true, handled: false },
+        HandleScroll: function () {
+            if (this.ScrollSate.InPause && !this.ScrollSate.handled) {
+                this.ScrollSate.handled = true;
+                setTimeout($.proxy(function () {
+                    this.InPause = false;
+                }, this), this.ScrollSate.WaiteTime);
             }
 
         }

@@ -3,8 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Configuration;
 using System.Net.Http;
 using System.Web.Http;
+using DChat.Model.DTO;
+using DChat.Model.Models;
 
 namespace DChat.WebApi.Controllers
 {
@@ -29,7 +32,18 @@ namespace DChat.WebApi.Controllers
         [Route("Get")]
         public dynamic Get(int id = 0)
         {
-            return new { Data = temps.Where(t=>t.Key>id).Select(t => t.Value).ToList<string>(), Index = temps.Count == 0 ? 0 : temps.Max(t => t.Key) };
+            MsgItemDTO msg = new MsgItemDTO();
+            msg.SendTime = DateTime.Now;
+            msg.Id = Guid.NewGuid();
+            msg.MsgContent = "哈哈哈，你好啊";
+            msg.UserId = 1;
+            msg.Sender = new UserInfo()
+            {
+                HeadImgPath = "../images/2.jpg",
+                NickName = "Lisa"
+
+            };
+            return msg;
         }
 
         // GET api/<controller>/5
