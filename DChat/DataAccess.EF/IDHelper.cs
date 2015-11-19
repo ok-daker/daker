@@ -6,7 +6,7 @@ using System.Security.Permissions;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-namespace DChat.Framework.Unity
+namespace DChat.DataAccess.EF
 {
     
     public static class IDHelper
@@ -39,11 +39,13 @@ namespace DChat.Framework.Unity
             return new MsgItem { };
         }
 
-        public static IEnumerable<MsgItem> GetNextAll(MsgItem msgItem)
+        public static IEnumerable<MsgItem> GetNextAll(MsgItem msgItem )
         {
             if (IsGuid(msgItem.Id.ToString()))
             {
                 //查询数据库 得到所有以当前msgItem.Id为parent_id的MsgItems 发送时间升序排列 并赋值给_nextAllItem
+                //创建上下文
+               
             }
             return new List<MsgItem>();
         }
