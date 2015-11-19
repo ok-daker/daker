@@ -7,6 +7,7 @@ using DChat.Core.interfaces;
 using DChat.Model.Models;
 using DChat.Framework.Cache;
 using DChat.Framework.IOC;
+using DChat.Model.DTO;
 
 namespace DChat.Core.implement
 {
@@ -18,7 +19,7 @@ namespace DChat.Core.implement
             throw new NotImplementedException();
         }
 
-        public IEnumerable<MsgItem> Get(Guid id)
+        public IEnumerable<MsgItemDTO> Get(Guid id)
         {
             throw new NotImplementedException();
         }

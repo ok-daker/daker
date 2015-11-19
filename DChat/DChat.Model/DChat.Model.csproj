@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\MsgItemDTO.cs" />
     <Compile Include="Models\MsgItem.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Processing\FlowBase.cs" />
@@ -48,7 +49,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DTO\" />
     <Folder Include="Enums\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
