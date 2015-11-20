@@ -48,6 +48,10 @@
     <Folder Include="factory\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataAccess.EF\DChat.DataAccess.csproj">
+      <Project>{f676b21d-99ee-452c-a452-f8aa6448f0e0}</Project>
+      <Name>DChat.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DChat.Model\DChat.Model.csproj">
       <Project>{79acfb7e-4743-473f-b87d-8a49baa76f54}</Project>
       <Name>DChat.Model</Name>

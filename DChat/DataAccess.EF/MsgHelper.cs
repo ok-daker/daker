@@ -11,7 +11,7 @@ namespace DChat.DataAccess
     
     public static class MsgHelper
     {
-        private static object _root = new object();        
+        private static readonly object _root = new object();        
         public static MsgItem _preMsgItem;
         public static IEnumerable<MsgItem> _nextAllItem;
 

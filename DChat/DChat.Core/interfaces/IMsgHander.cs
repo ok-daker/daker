@@ -12,6 +12,6 @@ namespace DChat.Core.interfaces
     public interface IMsgHandler
     {
         void Push(MsgItem msg);
-        IEnumerable<MsgItemDTO> Get(Guid id);
+        IEnumerable<MsgItem> Get(Guid? id);
     }
 }

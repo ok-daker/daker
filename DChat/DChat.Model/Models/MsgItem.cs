@@ -17,7 +17,8 @@ namespace DChat.Model.Models
         public virtual MsgItem Next { get; set; }
 
         public virtual MsgItem Pre { get; set; }
-        
+        public UserInfo Sender { get; set; }
+
         [NotMapped]
         public IList<MsgItem> NextAll
         {

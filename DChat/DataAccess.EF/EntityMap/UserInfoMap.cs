@@ -1,12 +1,7 @@
-﻿using DChat.Model.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity.ModelConfiguration;
+using DChat.Model.Models;
 
-namespace DChat.DataAccess
+namespace DChat.DataAccess.EntityMap
 {
     public class UserInfoMap : EntityTypeConfiguration<UserInfo>
     {
