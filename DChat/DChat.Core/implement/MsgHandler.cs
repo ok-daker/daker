@@ -22,9 +22,8 @@ namespace DChat.Core.implement
         public void Push(MsgItem msg)
         {
             msg = MsgHelper.GetMsgItem(msg);
-            Queue<MsgItem> msgs = cache.Get<Queue<MsgItem>>(MsgKey);
-            msgs = msgs ?? new Queue<MsgItem>();
-            msgs.Add(msg);
+            Queue<MsgItem> msgs = cache.Get<Queue<MsgItem>>(MsgKey)?? new Queue<MsgItem>();
+            msgs.Enqueue(msg);
         }
 
         public IEnumerable<MsgItem> Get(Guid? id)
