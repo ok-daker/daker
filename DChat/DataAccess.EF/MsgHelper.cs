@@ -26,6 +26,7 @@ namespace DChat.DataAccess
             {
                 msgItem.Id = Guid.NewGuid();
                 msgItem.Pre = _preMsgItem;
+                msgItem.SendTime = DateTime.Now;
                 _preMsgItem = msgItem;
                 return msgItem;
             }
