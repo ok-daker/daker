@@ -39,9 +39,8 @@ namespace DChat.Core.implement
                 IEnumerable<MsgItem> msgsToDBTemp = msgs.Take(index+1).AsEnumerable<MsgItem>();
                 Queue<MsgItem> msgsToDB = cache.Get<Queue<MsgItem>>(DBKey) ?? new Queue<MsgItem>();
                 foreach (MsgItem item in msgsToDBTemp)
-                {
-                    msgs.Dequeue();
-                    msgsToDB.Enqueue(item);
+                {                    
+                    msgsToDB.Enqueue(msgs.Dequeue());
                 }
                 if(msgsToDB.Count>=MaxLength)
                 {
