@@ -10,7 +10,7 @@ body { height: 100%; }
 .msg-list .right { position: relative; width: 300px; text-align: right; float: right; clear: both; margin-top: 20px; margin-bottom: 20px; }
 .msg-list .left .mscontent { position: relative; left: -15px; top: 15px; }
 .msg-list .right .mscontent { position: relative; right: 5px; top: 5px; }
-body { background-color: #2E2E2E; }
+body { }
 .body { background: -webkit-linear-gradient(left top, #323131, #2E2E2E); /* Safari 5.1 - 6.0 */ background: -o-linear-gradient(bottom right,#323131, #2E2E2E); /* Opera 11.1 - 12.0 */ background: -moz-linear-gradient(bottom right,#323131, #2E2E2E); /* Firefox 3.6 - 15 */ background: linear-gradient(to bottom right, #323131, #2E2E2E); /* 标准的语法 */ }
 .msg-list { background-color: white; padding: 5px; color: #666; font-size: 14px; font-family: "微软雅黑"; height: 80%; position: relative; overflow-x: hidden; overflow-y: auto; }
 .msg { background: #fff; border: 1px solid rgba(219, 20, 20, 0.97); padding: 5px; -ms-border-radius: 15px; -ms-border-radius: 50%; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; width: 260px; background-color: #2B2A2A; background: white; margin: 2px; font-family: "微软雅黑"; line-height: 20px; margin-left: 2%; width: 70%; }

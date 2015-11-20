@@ -212,6 +212,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\TalkController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\ViewSwitcherController.cs" />
@@ -243,11 +244,16 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Member\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess.EF\DChat.DataAccess.csproj">
       <Project>{f676b21d-99ee-452c-a452-f8aa6448f0e0}</Project>
       <Name>DChat.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DChat.Core\DChat.Core.csproj">
+      <Project>{9527d81e-cbd6-4276-a580-15068a96382a}</Project>
+      <Name>DChat.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\DChat.Model\DChat.Model.csproj">
       <Project>{79acfb7e-4743-473f-b87d-8a49baa76f54}</Project>

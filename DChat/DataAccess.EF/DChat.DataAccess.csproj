@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="ChatContext.cs" />
     <Compile Include="EntityMap\MsgItemMap.cs" />
+    <Compile Include="MemberAccess.cs" />
     <Compile Include="MsgHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EntityMap\UserInfoMap.cs" />

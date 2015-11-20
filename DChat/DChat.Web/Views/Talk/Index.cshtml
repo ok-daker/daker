@@ -4,6 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+        .login { height: 100%; width: 100%; position: fixed; top: 0; left: 0; background-color: rgba(46, 46, 46, 0.92); text-align: center; padding-top: 15%; }
+            .login input[type='text'] { height: 20px; margin: 5px; }
+    </style>
     <link href="~/Content/css/index.css" rel="stylesheet" />
     @*<link href="~/content/icono.min.css" rel="stylesheet" />*@
     <meta name="viewport" content="width=device-width" />
@@ -35,6 +39,20 @@
         </div>
     </div>
     <!--聊天框 end-->
+    <!--登录-->
+    <div class="login">
+        <div>
+            <div>
+                <label>用户:</label><input type="text" name="Name" id="Name" />
+            </div>
+            <div>
+                <label>密码:</label><input type="text" name="Password" id="Password"/>
+            </div>
+            <div>
+                <a id="login">登录</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 <script src="~/Scripts/jquery-2.1.4.min.js"></script>
@@ -61,7 +79,7 @@
             var usr = dChat.getUser(user);
             dChat.user = usr;
             this.get();
-            setInterval("CircleGet()", 1500, null);
+
         }
         ,
 
@@ -74,6 +92,7 @@
                    jsonp: 'callback',
                    //  timeout: dChat.config.waitTimeout,
                    success: function (data) {
+
                        //data = [
                        //    { MsgContent: "aaa", Id: "asadsadsdasdsaad", SendTime: new Date(), Sender: { Id: 1, Name: "张三", NickName: "Zhang-San", HeadImgPath: "../images/1.jpg" } },
                        //    { MsgContent: "bbb", Id: "bbbb", SendTime: new Date(), Sender: { Id: 1, Name: "张si", NickName: "Zhang-Si", HeadImgPath: "../images/2.jpg" } }
@@ -85,6 +104,7 @@
                            dChat.Index = data[data.length - 1].Id;
                            dChat.popMsgs(data, false);
                        }
+                       dChat.get();
 
                    },
                    error: function () {
@@ -205,7 +225,30 @@
 
 
     }
-    dChat.initial($(".msg-list"), { NickName: "Zh-cn" });
+
+    $.ajax({
+        url: 'http://localhost:53432/Message/get?id=' + dChat.Index,
+        type: 'post',
+        datatype: 'jsonp',
+        jsonp: 'callback',
+        success: function (jsondata) {
+            if (jsondata.status) {
+
+                dChat.initial($(".msg-list"), jsondata.Data);
+            } else {
+                {
+                    alert("用户名或密码错误.");
+
+                }
+            }
+
+
+        }, error: function () {
+            alert("服务器错误.");
+        }
+
+    });
+
 
 
 

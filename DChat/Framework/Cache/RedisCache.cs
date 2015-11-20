@@ -12,6 +12,7 @@ namespace DChat.Framework.Cache
     public class RedisCache : IRedisCache
     {
         private readonly PooledRedisClientManager clientManager;
+        private object root = new object();
         private readonly string host;
         public RedisCache()
         {
@@ -30,12 +31,21 @@ namespace DChat.Framework.Cache
                 if (!client.ContainsKey(key))
                 {
                     client.Add<T>(key, value);
-                    client.Save();
+                    lock (root)
+                    {
+                        client.Save();
+                        
+                    }
+               
                 }
                 else
                 {
                     client.Set<T>(key, value);
-                    client.Save();
+                    lock (root)
+                    {
+                        client.Save();
+
+                    }
 
                 }
             }
@@ -48,12 +58,20 @@ namespace DChat.Framework.Cache
                 if (!client.ContainsKey(key))
                 {
                     client.Add<T>(key, value, span);
-                    client.Save();
+                    lock (root)
+                    {
+                        client.Save();
+
+                    }
                 }
                 else
                 {
                     client.Set<T>(key, value, span);
-                    client.Save();
+                    lock (root)
+                    {
+                        client.Save();
+
+                    }
                 }
 
             }
