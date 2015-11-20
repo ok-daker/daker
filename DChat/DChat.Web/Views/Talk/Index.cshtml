@@ -1,11 +1,9 @@
 ﻿@{
     Layout = null;
 }
-
 <!DOCTYPE html>
 <html>
 <head>
-
     <link href="~/Content/css/index.css" rel="stylesheet" />
     @*<link href="~/content/icono.min.css" rel="stylesheet" />*@
     <meta name="viewport" content="width=device-width" />
@@ -83,12 +81,11 @@
                        //alert(data[data.length-1].Id);
                        //var jsondata = data;
                        //Get的消息记录条数大于0
-                       if (data.length > 0)
-                       {
-                            dChat.Index = data[data.length - 1].Id;
-                            dChat.popMsgs(data, false);
+                       if (data.length > 0) {
+                           dChat.Index = data[data.length - 1].Id;
+                           dChat.popMsgs(data, false);
                        }
-                       
+
                    },
                    error: function () {
 
@@ -97,7 +94,6 @@
 
                    }
                }
-
                 )
         },
         TestGet: function () {
@@ -105,17 +101,15 @@
             var waittime = x < 0.5 ? 2 : x * 5;
             dChat.send(waittime.toString(), false);
             setTimeout(dChat.TestGet, waittime * 1000);
-
         }
-
         ,
         send: function (msg, left) {
             var msgObject = { MsgContent: msg, Sender: { HeadImgPath: '../images/1.jpg', NickName: 'Json' } }
             $.ajax({
                 url: 'http://localhost:53432/Message/push?value=' + msg,
-                data: { value: msg },
+                data: JSON.stringify({ MsgContent: msg, UserId: 1, Sender: { UserId: 1, NickName: 'Daker', Name: 'Daker' } }),
                 type: "post",
-                //contenttype:"application/json",
+                contenttype: "application/json",
                 datatype: 'jsonp',
                 jsonp: 'callback'
             });
@@ -125,11 +119,10 @@
         },
         popMsgs: function (msg, left) {
             if (msg instanceof Array) {
-                for (var i = 0; i < msg.length; i++) {                    
-                    if (dChat.checkMsg(msg[i])) {                        
+                for (var i = 0; i < msg.length; i++) {
+                    if (dChat.checkMsg(msg[i])) {
                         dChat.popMsg(msg[i], left);
                     }
-
                 }
             }
             else if (dChat.checkMsg(msg)) {
@@ -146,7 +139,6 @@
             } else {
                 var msbody = $("<div>").addClass("left").append($("<div>").addClass("head").append($("<img>").attr("src", sender.HeadImgPath)).append($("<div>").addClass("nickname").text(sender.NickName))).append($("<div>").addClass("mscontent").text(msg));
                 $(".msg-list").append(msbody);
-
             }
             if ($(".msg-list>.left,.msg-list>.right").length > dChat.config.maxExistDom) {
                 var rmIndex = $(".msg-list>.left,.msg-list>.right").length - dChat.config.maxExistDom;
