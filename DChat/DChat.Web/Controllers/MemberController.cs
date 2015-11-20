@@ -25,6 +25,7 @@ namespace DChat.Web.Controllers
         public ActionResult Login()
         {
             return View();
+
         }
 
         [HttpPost]

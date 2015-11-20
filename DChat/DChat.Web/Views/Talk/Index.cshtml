@@ -43,15 +43,18 @@
     <!--登录-->
     <div class="login">
         <div>
-            <div>
-                <label>用户:</label><input type="text" name="Name" id="Name" />
-            </div>
-            <div>
-                <label>密码:</label><input type="text" name="Password" id="Password" />
-            </div>
-            <div>
-                <a id="login" style="cursor: pointer">登录</a>
-            </div>
+            <form id="fm">
+                <div>
+                    <label>用户:</label><input type="text" name="Name" id="Name" />
+                </div>
+                <div>
+                    <label>密码:</label><input type="text" name="Password" id="Password" />
+                </div>
+                <div>
+                    <a id="login" style="cursor: pointer">登录</a>
+                </div>
+            </form>
+      
         </div>
     </div>
 </body>
@@ -237,7 +240,7 @@
         $.ajax({
             url: "../Member/Login",
             type: 'post',
-            data: { Name: name, Password: pwd },
+            data:$("#fm").serialize(),
             datatype: 'json',
             success: function (jsondata) {
                 if (jsondata.status) {
