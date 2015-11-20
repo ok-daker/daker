@@ -7,6 +7,7 @@
     <style>
         .login { height: 100%; width: 100%; position: fixed; top: 0; left: 0; background-color: rgba(46, 46, 46, 0.92); text-align: center; padding-top: 15%; }
             .login input[type='text'] { height: 20px; margin: 5px; }
+            .login > div { padding: 30px; background-color: white; width: 380px; display: inline-block; }
     </style>
     <link href="~/Content/css/index.css" rel="stylesheet" />
     @*<link href="~/content/icono.min.css" rel="stylesheet" />*@
@@ -46,10 +47,10 @@
                 <label>用户:</label><input type="text" name="Name" id="Name" />
             </div>
             <div>
-                <label>密码:</label><input type="text" name="Password" id="Password"/>
+                <label>密码:</label><input type="text" name="Password" id="Password" />
             </div>
             <div>
-                <a id="login">登录</a>
+                <a id="login" style="cursor: pointer">登录</a>
             </div>
         </div>
     </div>
@@ -226,28 +227,38 @@
 
     }
 
-    $.ajax({
-        url: 'http://localhost:53432/Message/get?id=' + dChat.Index,
-        type: 'post',
-        datatype: 'jsonp',
-        jsonp: 'callback',
-        success: function (jsondata) {
-            if (jsondata.status) {
+    $("#login").click(function () {
+        var name = $("#Name").val();
+        var pwd = $("#Password").val();
+        if (!name || !pwd) {
+            alert("请输入用户名密码.");
+            return;
+        }
+        $.ajax({
+            url: "../Member/Login",
+            type: 'post',
+            data: { Name: name, Password: pwd },
+            datatype: 'json',
+            success: function (jsondata) {
+                if (jsondata.status) {
 
-                dChat.initial($(".msg-list"), jsondata.Data);
-            } else {
-                {
-                    alert("用户名或密码错误.");
+                    dChat.initial($(".msg-list"), jsondata.Data);
+                } else {
+                    {
+                        alert("用户名或密码错误.");
 
+                    }
                 }
+
+
+            }, error: function () {
+                alert("服务器错误.");
             }
 
-
-        }, error: function () {
-            alert("服务器错误.");
-        }
+        });
 
     });
+
 
 
 
