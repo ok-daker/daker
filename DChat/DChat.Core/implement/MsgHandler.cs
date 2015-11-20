@@ -35,6 +35,21 @@ namespace DChat.Core.implement
             int index = (id == null) ? -1 : msgs.Select(m => m.Id).ToList().IndexOf(id.Value);
             if (index != -1)
             {
+                //多余的 消息放到数据库缓存 准备存到数据库中
+                IEnumerable<MsgItem> msgsToDBTemp = msgs.Take(index+1).AsEnumerable<MsgItem>();
+                Queue<MsgItem> msgsToDB = cache.Get<Queue<MsgItem>>(DBKey) ?? new Queue<MsgItem>();
+                foreach (MsgItem item in msgsToDBTemp)
+                {
+                    msgs.Dequeue();
+                    msgsToDB.Enqueue(item);
+                }
+                if(msgsToDB.Count>=MaxLength)
+                {
+                    //写入数据库操作 
+                    //并清0 缓存
+                    msgsToDB.Clear();
+                
+                }
 
                 return msgs.Skip(index + 1).Take(50 - index).AsEnumerable();
             }
