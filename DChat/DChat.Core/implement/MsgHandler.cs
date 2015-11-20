@@ -25,6 +25,7 @@ namespace DChat.Core.implement
             msg = MsgHelper.GetMsgItem(msg);
             Queue<MsgItem> msgs = cache.Get<Queue<MsgItem>>(MsgKey)?? new Queue<MsgItem>();
             msgs.Enqueue(msg);
+            cache.Add(MsgKey,msgs);
         }
 
         public IEnumerable<MsgItem> Get(Guid? id)
