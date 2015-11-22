@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace DChat.Framework.Cache
 {
@@ -14,6 +15,7 @@ namespace DChat.Framework.Cache
         private readonly PooledRedisClientManager clientManager;
         private object root = new object();
         private readonly string host;
+        private SemaphoreSlim _slim = new SemaphoreSlim(10);
         public RedisCache()
         {
             ConfigurationFileMap filemap = new ConfigurationFileMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config/redis.config"));
@@ -26,6 +28,7 @@ namespace DChat.Framework.Cache
         }
         public void Add<T>(string key, T value)
         {
+            _slim.Wait();
             using (var client = clientManager.GetClient())
             {
                 if (!client.ContainsKey(key))
@@ -49,10 +52,12 @@ namespace DChat.Framework.Cache
 
                 }
             }
+            _slim.Release();
         }
 
         public void Add<T>(string key, T value, TimeSpan span)
         {
+            _slim.Wait();
             using (var client = clientManager.GetClient())
             {
                 if (!client.ContainsKey(key))
@@ -75,10 +80,12 @@ namespace DChat.Framework.Cache
                 }
 
             }
+            _slim.Release();
         }
 
         public void AddToList(string key, string value)
         {
+            _slim.Wait();
             using (var client = clientManager.GetClient())
             {
                 if (client.ContainsKey(key))
@@ -88,10 +95,12 @@ namespace DChat.Framework.Cache
                 }
 
             }
+            _slim.Release();
         }
 
         public T Get<T>(string key)
         {
+            _slim.Wait();
             using (var client = clientManager.GetClient())
             {
                 if (client.ContainsKey(key))
@@ -104,10 +113,12 @@ namespace DChat.Framework.Cache
                 }
 
             }
+            _slim.Release();
         }
 
         public void Remove(string key)
         {
+            _slim.Wait();
             using (var client = clientManager.GetClient())
             {
                 if (client.ContainsKey(key))
@@ -118,10 +129,12 @@ namespace DChat.Framework.Cache
 
 
             }
+            _slim.Release();
         }
 
         public void RemoveByRegex(string key)
         {
+            _slim.Wait();
             using (var client = clientManager.GetClient())
             {
                 var keys = client.SearchKeys(key);
@@ -133,6 +146,7 @@ namespace DChat.Framework.Cache
             
             
             }
+            _slim.Release();
         }
     }
 }

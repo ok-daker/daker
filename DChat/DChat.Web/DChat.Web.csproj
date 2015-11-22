@@ -185,6 +185,7 @@
     <Content Include="config\Log4Net.config" />
     <Content Include="images\1.jpg" />
     <Content Include="images\2.jpg" />
+    <Content Include="images\loading.gif" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Properties\PublishProfiles\configuration.pubxml" />
