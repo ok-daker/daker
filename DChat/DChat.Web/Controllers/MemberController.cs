@@ -29,17 +29,17 @@ namespace DChat.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult Login(string name, string pwd)
+        public JsonResult Login(string name, string password)
         {
-            var member = _service.Login(name, pwd);
+            var member = _service.Login(name, password);
             if (member != null)
             {
                 Session.Add("user:" + name, member);
-                return Json(new { status = 0, Data = member }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = 1, Data = member }, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                return Json(new { status = 1, message = "用户名或者密码错误" });
+                return Json(new { status = 0, message = "用户名或者密码错误" });
 
             }
         }

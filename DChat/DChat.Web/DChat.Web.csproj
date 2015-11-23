@@ -185,6 +185,7 @@
     <Content Include="config\Log4Net.config" />
     <Content Include="images\1.jpg" />
     <Content Include="images\2.jpg" />
+    <Content Include="images\loading.gif" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Properties\PublishProfiles\configuration.pubxml" />
@@ -234,6 +235,7 @@
     <Content Include="Views\Talk\Index.Mobile.cshtml" />
     <Content Include="Views\Shared\_ViewSwitcher.cshtml" />
     <Content Include="Views\Shared\_Layout.Mobile.cshtml" />
+    <Content Include="Views\Talk\Index - 复制.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

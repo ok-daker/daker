@@ -25,7 +25,17 @@ namespace DChat.Core.implement
         public void Push(MsgItem msg)
         {
             msg = MsgHelper.GetMsgItem(msg);
-            Queue<MsgItem> msgs = cache.Get<Queue<MsgItem>>(MsgKey) ?? new Queue<MsgItem>();
+            Queue<MsgItem> msgs;
+            try
+            {
+                msgs = cache.Get<Queue<MsgItem>>(MsgKey) ?? new Queue<MsgItem>();
+            }
+            catch (Exception ex)
+            {
+
+                msgs = new Queue<MsgItem>();
+            }
+      
             msgs.Enqueue(msg);
             if (msgs.Count>MaxLength)
             {
@@ -51,7 +61,17 @@ namespace DChat.Core.implement
 
         public IEnumerable<MsgItem> Get(Guid? id)
         {
-            Queue<MsgItem> msgs = cache.Get<Queue<MsgItem>>(MsgKey) ?? new Queue<MsgItem>();
+            Queue<MsgItem> msgs;
+                try
+            {
+                msgs = cache.Get<Queue<MsgItem>>(MsgKey) ?? new Queue<MsgItem>();
+            }
+            catch (Exception)
+            {
+
+                msgs = new Queue<MsgItem>();
+            }
+               
             //判断当前请求Id在不在缓存对列中
             //if (msgs.AsEnumerable<MsgItem>().Where(m => m.Id == id).Count() > 0)            
             int index = (id == null) ? -1 : msgs.Select(m => m.Id).ToList().IndexOf(id.Value);

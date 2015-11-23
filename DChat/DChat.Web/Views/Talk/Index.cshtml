@@ -5,42 +5,58 @@
 <html>
 <head>
     <style>
-        .login {height: 100%;width: 100%;position: fixed;top: 0;left: 0;background-color: rgba(0, 0, 0, 0.3);text-align: center;padding-top: 15%; }
-        .login form { padding: 10px; }
-            .login input[type='text'] { height: 30px; border: none; width: 215px; }
-        .login > div {background-color: white;width: 380px;display: inline-block; }
-        .tang-title {background-color: #f7f7f7;padding: 10px;text-align: left;padding-left: 10%;color: #666;font-family: sans-serif; }
-        .reg-con {font-size: 10px;text-align: right;padding-right: 20px; }
-        .reg-con a { color: #2e7fdb; }
-        .login div.input-con { width: 250px; border: 1px solid #ccc; /* margin: 5px; */ margin: 5px 15%; }
-        
+        .login {
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(46, 46, 46, 0.92);
+            text-align: center;
+            padding-top: 15%;
+        }
+
+            .login input[type='text'] {
+                height: 20px;
+                margin: 5px;
+            }
+
+            .login > div {
+                padding: 30px;
+                background-color: white;
+                width: 380px;
+                display: inline-block;
+            }
+
+        .loading {
+            cursor: pointer;
+            background: url(../images/loading.gif);
+            background-color: rgba(69, 68, 59, 0.11);
+            font-size: 8px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-size: 30px;
+            background-color: white;
+        }
     </style>
-    <link href="~/Content/icono.min.css" rel="stylesheet" /> 
     <link href="~/Content/css/index.css" rel="stylesheet" />
     @*<link href="~/content/icono.min.css" rel="stylesheet" />*@
     <meta name="viewport" content="width=device-width" />
     <title>Daker</title>
 </head>
 <body>
+    <div style="text-align:right">
+        <div style="  padding-right: 5%;
+  color: rgb(113, 64, 64);
+  font-family:'微软雅黑'; padding-right 5%;color rgb(113, 64, 64) ;">
+            <span>你好,</span><span id="curUser">未登录</span>
+        </div>
+    </div>
     <!--聊天框-->
-    <div id="container" class="enviroment-big">
+    <div id="container" class="enviroment-small">
         <div class="msg-list">
-            <div class="left">
-                <div class="head">
-                    <img src="~/images/1.jpg" /><div class="nickname">AAA</div>
-                </div>
-                <div class="mscontent">
-                    asdasda
-                </div>
-            </div>
-            <div class="right">
-                <div class="mscontent">
-                    addads
-                </div>
-                <div class="head">
-                    <img src="~/images/1.jpg" />
-                </div>
-            </div>
         </div>
         <div class="typearea">
             <div style="border:none;"><input type="text" class="msg" placeholder="输入..." /><a class="sendbtn"><span class=" icon"><span class="text">发送</span></span>  </a> </div><div></div>
@@ -49,29 +65,16 @@
     <!--聊天框 end-->
     <!--登录-->
     <div class="login">
-
         <div>
-            <div class="tang-title">
-                登录到DAKER
-            </div>
             <form id="fm">
-
                 <div>
-                    <div class="input-con">
-                        <span class="icono-user"></span><input type="text" name="Name" id="Name" />
-                    </div>
+                    <label>用户:</label><input type="text" name="Name" id="Name" />
                 </div>
                 <div>
-                    <div class="input-con">
-                        <span class="icono-flickr"></span><input type="text" name="Password" id="Password" />
-                    </div>
-                   
+                    <label>密码:</label><input type="password" name="Password" id="Password" />
                 </div>
                 <div>
-                    <a id="login" href="#" style="cursor: pointer">登录</a>
-                </div>
-                <div class="reg-con">
-                    <a id="reg" href="@Url.Action("Regester","Member")">立即注册</a>
+                    <a id="login" style="cursor: pointer">登录</a>
                 </div>
             </form>
 
@@ -101,7 +104,8 @@
                 throw new DOMException("dom not exist");
             }
             var usr = dChat.getUser(user);
-            dChat.user = usr;
+            dChat.user = user;
+            $("#curUser").text(user.NickName);
             this.get();
 
         }
@@ -126,7 +130,7 @@
                        //Get的消息记录条数大于0
                        if (data.length > 0) {
                            dChat.Index = data[data.length - 1].Id;
-                           dChat.popMsgs(data, false);
+                           dChat.GetpopMsgs(data, false);
                        }
                        dChat.get();
 
@@ -148,10 +152,10 @@
         }
         ,
         send: function (msg, left) {
-            var msgObject = { MsgContent: msg, Sender: { HeadImgPath: '../images/1.jpg', NickName: 'Json' } }
+            var msgObject = { MsgContent: msg, Sender: this.user }
             $.ajax({
                 url: 'http://localhost:53432/Message/push?value=' + msg,
-                data: JSON.stringify({ MsgContent: msg, UserId: 1, Sender: { UserId: 1, NickName: 'Daker', Name: 'Daker' } }),
+                data: JSON.stringify({ MsgContent: msg, UserId: 1, Sender: this.user }),
                 type: "post",
                 contenttype: "application/json",
                 datatype: 'jsonp',
@@ -165,6 +169,22 @@
             if (msg instanceof Array) {
                 for (var i = 0; i < msg.length; i++) {
                     if (dChat.checkMsg(msg[i])) {
+                        dChat.popMsg(msg[i], left);
+                    }
+                }
+            }
+            else if (dChat.checkMsg(msg)) {
+                dChat.popMsg(msg, left);
+            }
+        }
+        ,
+        GetpopMsgs: function (msg, left) {
+            if (msg instanceof Array) {
+                for (var i = 0; i < msg.length; i++) {
+                    if (dChat.checkMsg(msg[i])) {
+                        if (msg[i].Sender.Id == this.user.Id) {
+                            break;
+                        }
                         dChat.popMsg(msg[i], left);
                     }
                 }
@@ -197,6 +217,7 @@
         ,
         checkMsg: function (msg) {
             if (!msg || msg.length > dChat.config.maxMsgLength) {
+
                 return false;
             }
             return true;
@@ -257,6 +278,9 @@
             alert("请输入用户名密码.");
             return;
         }
+        $(this).addClass("loading");
+        $(this).text("");
+        $(this).attr("disabled", "true");
         $.ajax({
             url: "../Member/Login",
             type: 'post',
@@ -264,7 +288,7 @@
             datatype: 'json',
             success: function (jsondata) {
                 if (jsondata.status) {
-
+                    $(".login").slideUp();
                     dChat.initial($(".msg-list"), jsondata.Data);
                 } else {
                     {
@@ -272,10 +296,13 @@
 
                     }
                 }
-
-
             }, error: function () {
                 alert("服务器错误.");
+            },
+            complete: function () {
+                $("#login").removeClass("loading");
+                $("#login").text("登录");
+                $("#login").removeAttr("disabled");
             }
 
         });
