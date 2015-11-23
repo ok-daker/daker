@@ -5,10 +5,17 @@
 <html>
 <head>
     <style>
-        .login { height: 100%; width: 100%; position: fixed; top: 0; left: 0; background-color: rgba(46, 46, 46, 0.92); text-align: center; padding-top: 15%; }
-            .login input[type='text'] { height: 20px; margin: 5px; }
-            .login > div { padding: 30px; background-color: white; width: 380px; display: inline-block; }
+        .login {height: 100%;width: 100%;position: fixed;top: 0;left: 0;background-color: rgba(0, 0, 0, 0.3);text-align: center;padding-top: 15%; }
+        .login form { padding: 10px; }
+            .login input[type='text'] { height: 30px; border: none; width: 215px; }
+        .login > div {background-color: white;width: 380px;display: inline-block; }
+        .tang-title {background-color: #f7f7f7;padding: 10px;text-align: left;padding-left: 10%;color: #666;font-family: sans-serif; }
+        .reg-con {font-size: 10px;text-align: right;padding-right: 20px; }
+        .reg-con a { color: #2e7fdb; }
+        .login div.input-con { width: 250px; border: 1px solid #ccc; /* margin: 5px; */ margin: 5px 15%; }
+        
     </style>
+    <link href="~/Content/icono.min.css" rel="stylesheet" /> 
     <link href="~/Content/css/index.css" rel="stylesheet" />
     @*<link href="~/content/icono.min.css" rel="stylesheet" />*@
     <meta name="viewport" content="width=device-width" />
@@ -42,19 +49,32 @@
     <!--聊天框 end-->
     <!--登录-->
     <div class="login">
+
         <div>
+            <div class="tang-title">
+                登录到DAKER
+            </div>
             <form id="fm">
+
                 <div>
-                    <label>用户:</label><input type="text" name="Name" id="Name" />
+                    <div class="input-con">
+                        <span class="icono-user"></span><input type="text" name="Name" id="Name" />
+                    </div>
                 </div>
                 <div>
-                    <label>密码:</label><input type="text" name="Password" id="Password" />
+                    <div class="input-con">
+                        <span class="icono-flickr"></span><input type="text" name="Password" id="Password" />
+                    </div>
+                   
                 </div>
                 <div>
-                    <a id="login" style="cursor: pointer">登录</a>
+                    <a id="login" href="#" style="cursor: pointer">登录</a>
+                </div>
+                <div class="reg-con">
+                    <a id="reg" href="@Url.Action("Regester","Member")">立即注册</a>
                 </div>
             </form>
-      
+
         </div>
     </div>
 </body>
@@ -240,7 +260,7 @@
         $.ajax({
             url: "../Member/Login",
             type: 'post',
-            data:$("#fm").serialize(),
+            data: $("#fm").serialize(),
             datatype: 'json',
             success: function (jsondata) {
                 if (jsondata.status) {
