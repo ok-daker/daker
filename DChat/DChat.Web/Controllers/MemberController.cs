@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DChat.Core.interfaces;
+using DChat.Web.context;
 
 namespace DChat.Web.Controllers
 {
@@ -34,7 +35,7 @@ namespace DChat.Web.Controllers
             var member = _service.Login(name, password);
             if (member != null)
             {
-                Session.Add("user:" + name, member);
+                UsersContext.AddOnline(member);
                 return Json(new { status = 1, Data = member }, JsonRequestBehavior.AllowGet);
             }
             else
@@ -42,6 +43,11 @@ namespace DChat.Web.Controllers
                 return Json(new { status = 0, message = "用户名或者密码错误" });
 
             }
+        }
+        public JsonResult Onlines()
+        {
+            return Json(UsersContext.Users, JsonRequestBehavior.AllowGet);
+
         }
     }
 }
