@@ -5,57 +5,97 @@
 <html>
 <head>
     <style>
-        .login {
-            height: 100%;
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: rgba(46, 46, 46, 0.92);
-            text-align: center;
-            padding-top: 15%;
-        }
 
-            .login input[type='text'] {
-                height: 20px;
-                margin: 5px;
-            }
-
-            .login > div {
-                padding: 30px;
-                background-color: white;
-                width: 380px;
-                display: inline-block;
-            }
-
-        .loading {
-            cursor: pointer;
-            background: url(../images/loading.gif);
-            background-color: rgba(69, 68, 59, 0.11);
-            font-size: 8px;
-            background-repeat: no-repeat;
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            background-size: 30px;
-            background-color: white;
-        }
     </style>
+    <link href="~/Content/icono.min.css" rel="stylesheet" />
     <link href="~/Content/css/index.css" rel="stylesheet" />
     @*<link href="~/content/icono.min.css" rel="stylesheet" />*@
     <meta name="viewport" content="width=device-width" />
     <title>Daker</title>
 </head>
 <body>
-    <div style="text-align:right">
-        <div style="  padding-right: 5%;
-  color: rgb(113, 64, 64);
-  font-family:'微软雅黑'; padding-right 5%;color rgb(113, 64, 64) ;">
-            <span>你好,</span><span id="curUser">未登录</span>
+    <div style="text-align: right">
+        <div class="usr-state">
+            <span>你好,</span><span id="curUser">你还没有登录</span>
+        </div>
+    </div>
+
+    <div class="fl-left">
+        <div class="on-line">
+            <div class="title">
+                当前在线用户共8人.
+            </div>
+            <div>
+                <ul>
+
+                    <li class="one-li"><img src="~/images/1.jpg" /><span class="nick">Jack</span> </li>
+                    <li class="one-li"><img src="~/images/1.jpg" /><span class="nick">Lisa</span> </li>
+                    <li class="one-li"><img src="~/images/1.jpg" /><span class="nick">Lusan</span> </li>
+                    <li class="one-li"><img src="~/images/1.jpg" /><span class="nick">Nifa</span> </li>
+                    <li class="one-li"><img src="~/images/1.jpg" /><span class="nick">Jack</span> </li>
+
+                </ul>
+            </div>
+
+        </div>
+        <div class="what-new">
+            <div class="title">动态</div>
+            <div class="list">
+                <ul>
+                    <li class="off-state">
+                        windfierce离开了房间.
+                    </li>
+                    <li class="on-state">
+                        windfierce进入了房间.
+                    </li>
+                    <li class="off-state">
+                        windfierce离开了房间.
+                    </li>
+                    <li class="on-state">
+                        windfierce进入了房间.
+                    </li>
+                    <li class="off-state">
+                        windfierce离开了房间.
+                    </li>
+                    <li class="on-state">
+                        windfierce进入了房间.
+                    </li>
+                    <li class="off-state">
+                        windfierce离开了房间.
+                    </li>
+                    <li class="on-state">
+                        windfierce进入了房间.
+                    </li>
+                    <li class="off-state">
+                        windfierce离开了房间.
+                    </li>
+                    <li class="on-state">
+                        windfierce进入了房间.
+                    </li>
+                    <li class="off-state">
+                        windfierce离开了房间.
+                    </li>
+                    <li class="on-state">
+                        windfierce进入了房间.
+                    </li>
+                    <li class="off-state">
+                        windfierce离开了房间.
+                    </li>
+                    <li class="on-state">
+                        windfierce进入了房间.
+                    </li>
+                    <li class="off-state">
+                        windfierce离开了房间.
+                    </li>
+                    <li class="on-state">
+                        windfierce进入了房间.
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     <!--聊天框-->
-    <div id="container" class="enviroment-small">
+    <div id="container" class="enviroment-big">
         <div class="msg-list">
         </div>
         <div class="typearea">
@@ -66,15 +106,27 @@
     <!--登录-->
     <div class="login">
         <div>
+            <div class="tang-title">
+                登录到DAKER
+            </div>
             <form id="fm">
+
                 <div>
-                    <label>用户:</label><input type="text" name="Name" id="Name" />
+                    <div class="input-con">
+                        <span class="icono-user"></span><input type="text" name="Name" id="Name" placeholder="用户名" />
+                    </div>
                 </div>
                 <div>
-                    <label>密码:</label><input type="password" name="Password" id="Password" />
+                    <div class="input-con">
+                        <span class="icono-flickr"></span><input type="password" name="Password" id="Password" placeholder="密码" />
+                    </div>
+
                 </div>
-                <div>
-                    <a id="login" style="cursor: pointer">登录</a>
+                <div class="login-btn-con">
+                    <a id="login" href="#" class="login-btn">登录</a>
+                </div>
+                <div class="reg-con">
+                    <a id="reg" href="@Url.Action("Regester","Member")">立即注册</a>
                 </div>
             </form>
 
@@ -88,122 +140,90 @@
 
     var dChat = {
         config: {
+            apiHost: 'http://localhost:53432',
             maxMsgLength: 100,
             maxExistDom: 10,
             requestTimeout: 5,
-            waitTimeout: 3,
+            timeout: 3
         },
-        Index: 0,
-        tempIndex: 0,
-        user: {
-            NickName: "ZS"
-        }
+        Index: '',
+        user: {}
         ,
         initial: function (dom, user, msgs) {
-            if (!dom) {
-                throw new DOMException("dom not exist");
-            }
-            var usr = dChat.getUser(user);
             dChat.user = user;
-            $("#curUser").text(user.NickName);
-            this.get();
+            this.setLoginState(user.NickName);
+            this.polling();
 
         }
         ,
-
-        get: function () {
+        setLoginState: function (usrName) {
+            $("#curUser").text(usrName);
+        }
+        ,
+        polling: function () {
             $.ajax(
-               {
-                   url: 'http://localhost:53432/Message/get?id=' + dChat.Index,
-                   type: 'get',
-                   datatype: 'jsonp',
-                   jsonp: 'callback',
-                   //  timeout: dChat.config.waitTimeout,
-                   success: function (data) {
+                {
+                    url: dChat.config.apiHost + "/Message/get?id=" + dChat.Index,
+                    type: 'get',
+                    datatype: 'jsonp',
+                    jsonp: 'callback',
+                    timeout: dChat.config.timeout,
+                    success: function (data) {
+                        if (data.length > 0) {
+                            dChat.Index = $(data).last().Id;
+                            if (data instanceof Array) {
+                                $(data).each(function () {
+                                    if (dChat.filtered($(this))) {
+                                        dChat.popLeft($(this));
+                                    }
+                                });
 
-                       //data = [
-                       //    { MsgContent: "aaa", Id: "asadsadsdasdsaad", SendTime: new Date(), Sender: { Id: 1, Name: "张三", NickName: "Zhang-San", HeadImgPath: "../images/1.jpg" } },
-                       //    { MsgContent: "bbb", Id: "bbbb", SendTime: new Date(), Sender: { Id: 1, Name: "张si", NickName: "Zhang-Si", HeadImgPath: "../images/2.jpg" } }
-                       //];
-                       //alert(data[data.length-1].Id);
-                       //var jsondata = data;
-                       //Get的消息记录条数大于0
-                       if (data.length > 0) {
-                           dChat.Index = data[data.length - 1].Id;
-                           dChat.GetpopMsgs(data, false);
-                       }
-                       dChat.get();
+                            } else {
+                                if (dChat.filtered($(data))) {
+                                    dChat.popLeft($(data));
+                                }
+                            }
+                        }
+                        dChat.polling();
 
-                   },
-                   error: function () {
+                    },
+                    error: function () {
+                        setTimeout(dChat.polling, 3000);//出现错误，则3秒后重试
+                    }
 
-                   },
-                   complete: function () {
-
-                   }
-               }
-                )
+                }
+            );
         },
-        TestGet: function () {
-            var x = Math.random();
-            var waittime = x < 0.5 ? 2 : x * 5;
-            dChat.send(waittime.toString(), false);
-            setTimeout(dChat.TestGet, waittime * 1000);
-        }
-        ,
-        send: function (msg, left) {
+        send: function () {
+            var msg = $(".typearea .msg").val();
+            $(".typearea .msg").val("");
             var msgObject = { MsgContent: msg, Sender: this.user }
             $.ajax({
-                url: 'http://localhost:53432/Message/push?value=' + msg,
-                data: JSON.stringify({ MsgContent: msg, UserId: 1, Sender: this.user }),
+                url: this.config.apiHost + '/Message/push?value=' + msg,
+                data: JSON.stringify({ MsgContent: msg, UserId: this.user.UserId, Sender: this.user }),
                 type: "post",
                 contenttype: "application/json",
                 datatype: 'jsonp',
                 jsonp: 'callback'
             });
-            dChat.popMsgs(msgObject, true);
+            dChat.popRight(msgObject);
 
 
-        },
-        popMsgs: function (msg, left) {
-            if (msg instanceof Array) {
-                for (var i = 0; i < msg.length; i++) {
-                    if (dChat.checkMsg(msg[i])) {
-                        dChat.popMsg(msg[i], left);
-                    }
-                }
-            }
-            else if (dChat.checkMsg(msg)) {
-                dChat.popMsg(msg, left);
-            }
         }
         ,
-        GetpopMsgs: function (msg, left) {
-            if (msg instanceof Array) {
-                for (var i = 0; i < msg.length; i++) {
-                    if (dChat.checkMsg(msg[i])) {
-                        if (msg[i].Sender.Id == this.user.Id) {
-                            break;
-                        }
-                        dChat.popMsg(msg[i], left);
-                    }
-                }
+        filtered: function (msg) {
+            if (msg && msg.Sender.Id != this.user.Id) {
+                return true;
             }
-            else if (dChat.checkMsg(msg)) {
-                dChat.popMsg(msg, left);
-            }
+            return false;
+
         }
         ,
-        popMsg: function (data, isright) {
+        popRight: function (data) {
             var msg = decodeURI(data.MsgContent);
             var sender = data.Sender;
-            if (isright) {
-                var msbody = $("<div>").addClass("right").append($("<div>").addClass("mscontent").text(msg)).append($("<div>").addClass("head").append($("<img>").attr("src", sender.HeadImgPath)));
-                $(".msg-list").append(msbody);
-            } else {
-                var msbody = $("<div>").addClass("left").append($("<div>").addClass("head").append($("<img>").attr("src", sender.HeadImgPath)).append($("<div>").addClass("nickname").text(sender.NickName))).append($("<div>").addClass("mscontent").text(msg));
-                $(".msg-list").append(msbody);
-            }
+            var msbody = $("<div>").addClass("right").append($("<div>").addClass("mscontent").text(msg)).append($("<div>").addClass("head").append($("<img>").attr("src", sender.HeadImgPath)));
+            $(".msg-list").append(msbody);
             if ($(".msg-list>.left,.msg-list>.right").length > dChat.config.maxExistDom) {
                 var rmIndex = $(".msg-list>.left,.msg-list>.right").length - dChat.config.maxExistDom;
                 var extraDoms = $(".msg-list>div:lt(" + rmIndex + ")");
@@ -212,65 +232,32 @@
             var height = $(".msg-list").get(0).scrollHeight;
             //HandleScroll();
             $(".msg-list").animate({ scrollTop: height }, 800);
-
         }
         ,
-        checkMsg: function (msg) {
-            if (!msg || msg.length > dChat.config.maxMsgLength) {
-
-                return false;
+        popLeft: function (data) {
+            var msg = decodeURI(data.MsgContent);
+            var sender = data.Sender;
+            var msbody = $("<div>").addClass("left").append($("<div>").addClass("head").append($("<img>").attr("src", sender.HeadImgPath)).append($("<div>").addClass("nickname").text(sender.NickName))).append($("<div>").addClass("mscontent").text(msg));
+            $(".msg-list").append(msbody);
+            if ($(".msg-list>.left,.msg-list>.right").length > dChat.config.maxExistDom) {
+                var rmIndex = $(".msg-list>.left,.msg-list>.right").length - dChat.config.maxExistDom;
+                var extraDoms = $(".msg-list>div:lt(" + rmIndex + ")");
+                extraDoms.remove();
             }
-            return true;
-
-        },
-        getUser: function (user) {
-            if (!user || !("Name" in user)) {
-                return {
-                    Name: "匿名用户",
-                    ID: ""
-                }
-            }
-
-        },
-        PauseScroll: function () {
-
-        },
-        ScrollSate: { WaiteTime: 2, InPause: true, handled: false },
-        HandleScroll: function () {
-            if (this.ScrollSate.InPause && !this.ScrollSate.handled) {
-                this.ScrollSate.handled = true;
-                setTimeout($.proxy(function () {
-                    this.InPause = false;
-                }, this), this.ScrollSate.WaiteTime);
-            }
-
+            var height = $(".msg-list").get(0).scrollHeight;
+            $(".msg-list").animate({ scrollTop: height }, 800);
         }
-
-
-    };
-    //发送
-    function sendMsg() {
-
-        var msg = $(".typearea .msg").val();
-        $(".typearea .msg").val("");
-        dChat.send(msg, true);
     };
     //点击发送
     $(".sendbtn").click(function () {
-        sendMsg();
+        dChat.send();
     });
     //ctrl+enter发送
     $(document).keydown(function (event) {
         if (event.ctrlKey && event.keyCode == 13) {
-            sendMsg();
+            dChat.send();
         }
     });
-    function CircleGet() {
-        dChat.get();
-
-
-    }
-
     $("#login").click(function () {
         var name = $("#Name").val();
         var pwd = $("#Password").val();
@@ -304,15 +291,8 @@
                 $("#login").text("登录");
                 $("#login").removeAttr("disabled");
             }
-
         });
-
     });
-
-
-
-
-
 </script>
 <script>
 </script>

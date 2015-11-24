@@ -1,7 +1,8 @@
 ﻿html { height: 100%; }
 body { height: 95%; }
-.enviroment-big { width: 40%; margin-left: 30%; text-align: center; height: 100%; margin-top: 0;margin-bottom: 0; padding: 0; }
-.enviroment-small { width: 100%; padding: 5px; text-align: center; height: 100%; margin: 0; padding: 0; }
+/*------------------------------聊天框------------------------------------------------*/
+.enviroment-big { height: 610px; width: 40%; margin-left: 30%; text-align: center; height: 100%; margin-top: 0; margin-bottom: 0; padding: 0; }
+.enviroment-small { height: 610px; width: 100%; padding: 5px; text-align: center; height: 100%; margin: 0; padding: 0; }
 .mscontent { background: #CDD7E2; padding: 8px; max-width: 50%; border-radius: 5px; display: inline-block; clear: both; vertical-align: text-top; word-break: break-all; }
 .head { display: inline-block; }
     .head img { width: 30px; height: 30px; }
@@ -12,11 +13,36 @@ body { height: 95%; }
 .msg-list .right .mscontent { position: relative; right: 5px; top: 5px; }
 body { }
 .body { background: -webkit-linear-gradient(left top, #323131, #2E2E2E); /* Safari 5.1 - 6.0 */ background: -o-linear-gradient(bottom right,#323131, #2E2E2E); /* Opera 11.1 - 12.0 */ background: -moz-linear-gradient(bottom right,#323131, #2E2E2E); /* Firefox 3.6 - 15 */ background: linear-gradient(to bottom right, #323131, #2E2E2E); /* 标准的语法 */ }
-.msg-list { border: 1px solid rgb(207, 170, 170);background-color: white; padding: 5px; color: #666; font-size: 14px; font-family: "微软雅黑"; height: 80%; position: relative; overflow-x: hidden; overflow-y: auto; }
+.msg-list { border: 1px solid rgb(207, 170, 170); background-color: white; padding: 5px; color: #666; font-size: 14px; font-family: "微软雅黑"; height: 500px; position: relative; overflow-x: hidden; overflow-y: auto; }
 .msg { background: #fff; border: 1px solid rgba(219, 20, 20, 0.97); padding: 5px; -ms-border-radius: 15px; -ms-border-radius: 50%; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; width: 260px; background-color: #2B2A2A; background: white; margin: 2px; font-family: "微软雅黑"; line-height: 20px; margin-left: 2%; width: 70%; }
 .typearea { margin: 5px; text-align: center; }
     .typearea > div { }
     .typearea .sendbtn { position: relative; cursor: default; color: rgb(26, 25, 25); margin-left: 1%; }
         .typearea .sendbtn .icon { width: 42px; height: 33px; background-color: #ddd; display: inline-block; -ms-border-radius: 50%; border-radius: 50%; vertical-align: middle; }
-
         .typearea .sendbtn .text { font-size: 12px; /* margin-left: -25px; */ position: absolute; left: 8px; top: 3px; }
+/*---------------------------------左侧在线状态---------------------------------------------*/
+.what-new { border: 1px solid rgb(207, 170, 170); height: 179px; border-right: none; border-top: none; padding-top: 10px; }
+    .what-new .title { font-size: 14px; color: rgb(94, 121, 91); padding-left: 20px; height: 10%; text-align: left; }
+    .what-new .on-state { color: rgb(0, 123, 6); }
+    .what-new .off-state { color: rgb(244, 13, 13); }
+    .what-new ul li { font-size: 14px; font-family: cursive; margin: 1px; }
+    .what-new .list { overflow-x: hidden; overflow-y: auto; height: 80%; }
+.on-line { border: 1px solid rgb(207, 170, 170); border-right: none; overflow-y: auto; overflow-x: hidden; height: 320px; }
+.title { border-bottom: 1px dotted rgba(199, 80, 89, 0.22); font-family: sans-serif; font-size: 14px; padding: 5px; text-align: left; color: rgb(94, 121, 91); }
+.on-line ul { list-style: none; padding: 1px 2; display: inline-block; padding: 1px 10px; width: 100%; }
+.on-line .one-li { display: inline-block; float: left; vertical-align: middle; /* padding: 5px; */ position: Relative; width: 25%; margin-top: 10px; }
+    .on-line .one-li img { width: 80px; height: 80px; }
+    .on-line .one-li .nick { width: 36px; overflow: hidden; font-size: 16px; /* vertical-align: middle; */ /* margin-left: -40px; */ position: absolute; left: 42px; bottom: 5px; color: white; }
+.fl-left { float: left; width: 30%; height: 60%; }
+.usr-state { padding-right: 5%; color: rgb(113, 64, 64); font-family: '微软雅黑'; padding-right 5%; color rgb(113, 64, 64); }
+.login { height: 100%; width: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.3); text-align: center; padding-top: 15%; }
+    .login form { padding: 10px; }
+    .login input { height: 30px; border: none; width: 215px; }
+    .login > div { background-color: white; width: 380px; display: inline-block; }
+.tang-title { background-color: #e4e4e4; padding: 10px; text-align: left; padding-left: 10%; color: #666; font-family: sans-serif; }
+.reg-con { font-size: 10px; text-align: right; padding-right: 20px; }
+    .reg-con a { color: #2e7fdb; }
+.login div.input-con { width: 250px; border: 1px solid #ccc; /* margin: 5px; */ margin: 5px 15%; }
+.login-btn-con { padding-top: 10px; }
+.login-btn { cursor: pointer; background-color: #2e7fdb; padding: 5px 15px; color: white; /* margin: 10px; */ text-decoration: none; }
+.loading { cursor: pointer; background: url(../../images/loading.gif); background-color: rgba(69, 68, 59, 0.11); font-size: 8px; background-repeat: no-repeat; display: inline-block; width: 30px; height: 30px; background-size: 30px; background-color: white; }
