@@ -5,7 +5,6 @@
 <html>
 <head>
     <style>
-
     </style>
     <link href="~/Content/icono.min.css" rel="stylesheet" />
     <link href="~/Content/css/index.css" rel="stylesheet" />
@@ -23,74 +22,17 @@
     <div class="fl-left">
         <div class="on-line">
             <div class="title">
-                当前在线用户共8人.
+                当前在线用户共<span class="online-count">0</span>人.
             </div>
             <div>
-                <ul>
-
-                    <li class="one-li"><img src="~/images/1.jpg" /><span class="nick">Jack</span> </li>
-                    <li class="one-li"><img src="~/images/1.jpg" /><span class="nick">Lisa</span> </li>
-                    <li class="one-li"><img src="~/images/1.jpg" /><span class="nick">Lusan</span> </li>
-                    <li class="one-li"><img src="~/images/1.jpg" /><span class="nick">Nifa</span> </li>
-                    <li class="one-li"><img src="~/images/1.jpg" /><span class="nick">Jack</span> </li>
-
-                </ul>
+                <ul></ul>
             </div>
 
         </div>
         <div class="what-new">
             <div class="title">动态</div>
             <div class="list">
-                <ul>
-                    <li class="off-state">
-                        windfierce离开了房间.
-                    </li>
-                    <li class="on-state">
-                        windfierce进入了房间.
-                    </li>
-                    <li class="off-state">
-                        windfierce离开了房间.
-                    </li>
-                    <li class="on-state">
-                        windfierce进入了房间.
-                    </li>
-                    <li class="off-state">
-                        windfierce离开了房间.
-                    </li>
-                    <li class="on-state">
-                        windfierce进入了房间.
-                    </li>
-                    <li class="off-state">
-                        windfierce离开了房间.
-                    </li>
-                    <li class="on-state">
-                        windfierce进入了房间.
-                    </li>
-                    <li class="off-state">
-                        windfierce离开了房间.
-                    </li>
-                    <li class="on-state">
-                        windfierce进入了房间.
-                    </li>
-                    <li class="off-state">
-                        windfierce离开了房间.
-                    </li>
-                    <li class="on-state">
-                        windfierce进入了房间.
-                    </li>
-                    <li class="off-state">
-                        windfierce离开了房间.
-                    </li>
-                    <li class="on-state">
-                        windfierce进入了房间.
-                    </li>
-                    <li class="off-state">
-                        windfierce离开了房间.
-                    </li>
-                    <li class="on-state">
-                        windfierce进入了房间.
-                    </li>
-                </ul>
+                <ul></ul>
             </div>
         </div>
     </div>
@@ -99,7 +41,10 @@
         <div class="msg-list">
         </div>
         <div class="typearea">
-            <div style="border:none;"><input type="text" class="msg" placeholder="输入..." /><a class="sendbtn"><span class=" icon"><span class="text">发送</span></span>  </a> </div><div></div>
+            <div style="border: none;">
+                <input type="text" class="msg" placeholder="输入..." /><a class="sendbtn"><span class=" icon"><span class="text">发送</span></span>  </a>
+            </div>
+            <div></div>
         </div>
     </div>
     <!--聊天框 end-->
@@ -126,7 +71,7 @@
                     <a id="login" href="#" class="login-btn">登录</a>
                 </div>
                 <div class="reg-con">
-                    <a id="reg" href="@Url.Action("Regester","Member")">立即注册</a>
+                    <a id="reg" href="@Url.Action("Regester", "Member")">立即注册</a>
                 </div>
             </form>
 
@@ -134,6 +79,7 @@
     </div>
 </body>
 </html>
+<script src="~/Scripts/ofpages/chat.js"></script>
 <script src="~/Scripts/jquery-2.1.4.min.js"></script>
 <script>
 
@@ -149,50 +95,116 @@
         Index: '',
         user: {}
         ,
+        OnlineUsers: []
+        ,
         initial: function (dom, user, msgs) {
             dChat.user = user;
+            this.onLineOne(user);
             this.setLoginState(user.NickName);
             this.polling();
+            //this.OnlineFirst();
 
         }
         ,
         setLoginState: function (usrName) {
             $("#curUser").text(usrName);
         }
+        //,
+        /*OnlineFirst: function () {
+             $.ajax({
+                 url: '../Member/Onlines',
+                 type: 'get',
+                 datatype: 'jsonp',
+                 jsonp: 'callback',
+                 // timeout: dChat.config.timeout,
+                 success: function (data) {
+                     if (data.status) {
+                         var usrs = data.Data;
+                         if (usrs.length) {
+                             dChat.OnlineUsers = usrs;
+                             dChat.updateOnlines(usrs);
+                         }
+                     } else {
+                         {
+                             alert("用户名或密码错误.");
+                         }
+                     }
+                 }
+
+             });
+
+         }
+         */,
+        onLineOne: function (curUser) {
+            if (!dChat.OnlineUsers.containsUser(curUser)) {
+                dChat.OnlineUsers.push(curUser);
+                var $newContainer = $(".what-new .list ul");
+                var $newDom = $("<li>").addClass("on-state").text(curUser.NickName + "进入了房间.");
+                $newContainer.append($newDom);
+                var $container = $(".on-line ul");
+                var liDom = $("<li>").addClass("one-li").attr("usrid", curUser.Id).append($("<img>").attr("src", curUser.HeadImgPath)).append($("<span>").addClass("nick").text(curUser.NickName));
+                $container.append(liDom);
+            }
+
+
+        }
+        ,
+        offLineOne: function (usr) {
+            var $newContainer = $("what-new list ul");
+            var $newDom = $("<li>").addClass("on-state").text(curUser.NickName + "离开了房间.");
+            $newContainer.append($newDom);
+            var $container = $(".on-line ul");
+            $container.children("li.one-li").each(function () {
+                var $tsDom = $(this);
+                if ($tsDom.attr("usrid") == usr.Id) {
+                    $tsDom.remove();
+                }
+
+            })
+
+        }
         ,
         polling: function () {
-            $.ajax(
-                {
-                    url: dChat.config.apiHost + "/Message/get?id=" + dChat.Index,
-                    type: 'get',
-                    datatype: 'jsonp',
-                    jsonp: 'callback',
-                    timeout: dChat.config.timeout,
-                    success: function (data) {
-                        if (data.length > 0) {
-                            dChat.Index = $(data).last().Id;
-                            if (data instanceof Array) {
-                                $(data).each(function () {
-                                    if (dChat.filtered($(this))) {
-                                        dChat.popLeft($(this));
-                                    }
-                                });
+            try {
+                $.ajax(
+                    {
+                        url: dChat.config.apiHost + "/Message/get?id=" + dChat.Index,
+                        type: 'get',
+                        datatype: 'jsonp',
+                        jsonp: 'callback',
+                        // timeout: dChat.config.timeout,
+                        success: function (totaldata) {
+                            var data = totaldata.Message;
+                            var usrs = totaldata.Users;
+                            dChat.updateOnlines(usrs);
+                            if (data.length > 0) {
+                                dChat.Index = $(data).last()[0].Id;
+                                if (data instanceof Array) {
+                                    $(data).each(function () {
+                                        if (dChat.filtered(this)) {
+                                            dChat.popLeft(this);
+                                        }
+                                    });
 
-                            } else {
-                                if (dChat.filtered($(data))) {
-                                    dChat.popLeft($(data));
+                                } else {
+                                    if (dChat.filtered($(data))) {
+                                        dChat.popLeft($(data));
+                                    }
                                 }
                             }
+                            dChat.polling();
+
+                        },
+                        error: function () {
+                            setTimeout(dChat.polling, 3000);//出现错误，则3秒后重试
                         }
-                        dChat.polling();
 
-                    },
-                    error: function () {
-                        setTimeout(dChat.polling, 3000);//出现错误，则3秒后重试
                     }
+                );
+            } catch (e) {
 
-                }
-            );
+            }
+
         },
         send: function () {
             var msg = $(".typearea .msg").val();
@@ -211,8 +223,28 @@
 
         }
         ,
+        updateOnlines: function (usrs) {
+            //1.add
+            if (usrs && usrs.length) {
+                $(".online-count").text(usrs.length);
+                $(usrs).each(function () {
+                    var curUsr = this;
+                    dChat.onLineOne(curUsr);
+                })
+                $(dChat.OnlineUsers).each(function () {
+                    var usr = this;
+                    if (!usrs.containsUser(usr)) {
+                        dChat.offLineOne(usr);
+                    }
+
+                });
+            }
+
+
+        }
+        ,
         filtered: function (msg) {
-            if (msg && msg.Sender.Id != this.user.Id) {
+            if (msg && msg.Sender.Id != dChat.user.Id) {
                 return true;
             }
             return false;
@@ -254,7 +286,7 @@
     });
     //ctrl+enter发送
     $(document).keydown(function (event) {
-        if (event.ctrlKey && event.keyCode == 13) {
+        if ((event.ctrlKey && event.keyCode == 13) || (event.keyCode == 13)) {
             dChat.send();
         }
     });
@@ -294,5 +326,10 @@
         });
     });
 </script>
+<script src="~/Scripts/notify.js"></script>
 <script>
+    Notifier.HasSupport();
+    Notifier.RequestPermission();
+    Notifier.Notify("../images/headers/1.jpg", "一个通知","通知了");
+
 </script>

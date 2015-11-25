@@ -28,7 +28,7 @@ namespace DChat.Framework.Cache
         }
         public void Add<T>(string key, T value)
         {
-            _slim.Wait();
+            _slim.Wait(TimeSpan.FromTicks(1000));
             using (var client = clientManager.GetClient())
             {
                 if (!client.ContainsKey(key))
@@ -57,7 +57,7 @@ namespace DChat.Framework.Cache
 
         public void Add<T>(string key, T value, TimeSpan span)
         {
-            _slim.Wait();
+            _slim.Wait(TimeSpan.FromTicks(1000));
             using (var client = clientManager.GetClient())
             {
                 if (!client.ContainsKey(key))
@@ -85,7 +85,7 @@ namespace DChat.Framework.Cache
 
         public void AddToList(string key, string value)
         {
-            _slim.Wait();
+            _slim.Wait(TimeSpan.FromTicks(1000));
             using (var client = clientManager.GetClient())
             {
                 if (client.ContainsKey(key))
@@ -100,7 +100,7 @@ namespace DChat.Framework.Cache
 
         public T Get<T>(string key)
         {
-            _slim.Wait();
+            _slim.Wait(TimeSpan.FromTicks(1000));
             using (var client = clientManager.GetClient())
             {
                 if (client.ContainsKey(key))
@@ -118,7 +118,7 @@ namespace DChat.Framework.Cache
 
         public void Remove(string key)
         {
-            _slim.Wait();
+            _slim.Wait(TimeSpan.FromTicks(1000));
             using (var client = clientManager.GetClient())
             {
                 if (client.ContainsKey(key))
@@ -134,7 +134,7 @@ namespace DChat.Framework.Cache
 
         public void RemoveByRegex(string key)
         {
-            _slim.Wait();
+            _slim.Wait(TimeSpan.FromTicks(1000));
             using (var client = clientManager.GetClient())
             {
                 var keys = client.SearchKeys(key);

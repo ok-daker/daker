@@ -29,7 +29,6 @@ namespace DChat.WebApi
             {
                 var loger = Resolver.Current.Resolve<ILogger>();
                 loger.Error(ex);
-                Response.Redirect("~/Account/InnerError?");
                 Server.ClearError();
             }
         }

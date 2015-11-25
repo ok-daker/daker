@@ -32,7 +32,7 @@ body { }
 .on-line ul { list-style: none; padding: 1px 2; display: inline-block; padding: 1px 10px; width: 100%; }
 .on-line .one-li { display: inline-block; float: left; vertical-align: middle; /* padding: 5px; */ position: Relative; width: 25%; margin-top: 10px; }
     .on-line .one-li img { width: 80px; height: 80px; }
-    .on-line .one-li .nick { width: 36px; overflow: hidden; font-size: 16px; /* vertical-align: middle; */ /* margin-left: -40px; */ position: absolute; left: 42px; bottom: 5px; color: white; }
+    .on-line .one-li .nick {  overflow: hidden; font-size: 16px; /* vertical-align: middle; */ /* margin-left: -40px; */ position: absolute; bottom: 5px; color: white;  right: 20px;white-space: nowrap;font-size: 6px; }
 .fl-left { float: left; width: 30%; height: 60%; }
 .usr-state { padding-right: 5%; color: rgb(113, 64, 64); font-family: '微软雅黑'; padding-right 5%; color rgb(113, 64, 64); }
 .login { height: 100%; width: 100%; position: fixed; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.3); text-align: center; padding-top: 15%; }

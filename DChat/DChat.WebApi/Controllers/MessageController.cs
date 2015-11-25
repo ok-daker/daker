@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Configuration;
 using System.Net.Http;
 using System.Web.Http;
+using DChat.Core.context;
 using DChat.Core.interfaces;
 using DChat.Model.DTO;
 using DChat.Model.Models;
@@ -36,7 +37,8 @@ namespace DChat.WebApi.Controllers
         public dynamic Get(Guid? id)
         {
             var msgs = _handler.Get(id);
-            return msgs;
+            var usrs = UsersContext.Users;
+            return new { Message = msgs, Users = usrs };
         }
 
         // GET api/<controller>/5

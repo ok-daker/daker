@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DChat.Core.context;
 using DChat.Core.interfaces;
-using DChat.Web.context;
 
 namespace DChat.Web.Controllers
 {
@@ -35,7 +35,7 @@ namespace DChat.Web.Controllers
             var member = _service.Login(name, password);
             if (member != null)
             {
-                UsersContext.AddOnline(member);
+                UsersContext.AddOnLine(member);
                 return Json(new { status = 1, Data = member }, JsonRequestBehavior.AllowGet);
             }
             else
@@ -46,7 +46,7 @@ namespace DChat.Web.Controllers
         }
         public JsonResult Onlines()
         {
-            return Json(UsersContext.Users, JsonRequestBehavior.AllowGet);
+            return Json(new { status = 1, Data = UsersContext.Users }, JsonRequestBehavior.AllowGet);
 
         }
     }

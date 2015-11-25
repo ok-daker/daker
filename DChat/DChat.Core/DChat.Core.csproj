@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="context\UsersContext.cs" />
     <Compile Include="implement\MemberService.cs" />
     <Compile Include="implement\MsgHandler.cs" />
     <Compile Include="interfaces\IMemberService.cs" />
@@ -47,9 +48,7 @@
     <Compile Include="iplugin\IPluginBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="factory\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DataAccess.EF\DChat.DataAccess.csproj">
       <Project>{f676b21d-99ee-452c-a452-f8aa6448f0e0}</Project>
