@@ -1,7 +1,7 @@
 ﻿
-var Notification = window.Notification || window.mozNotification || window.webkitNotification;
+var Notification =Notification  || window.mozNotification || window.webkitNotification;
 function Notice(title, body) {
-    if (Notification && Notification.permission == "denied") {
+    if (Notification && Notification.permission != "granted") {
         Notification.requestPermission(function (status) {
             //获取授权
             if (status == "denied") {
