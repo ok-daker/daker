@@ -49,5 +49,11 @@ namespace DChat.Web.Controllers
             return Json(new { status = 1, Data = UsersContext.Users }, JsonRequestBehavior.AllowGet);
 
         }
+
+        public void OffLine(int id)
+        {
+            UsersContext.SetOffLine(id);
+
+        }
     }
 }

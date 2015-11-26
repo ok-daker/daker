@@ -18,7 +18,6 @@
             <span>你好,</span><span id="curUser">你还没有登录</span>
         </div>
     </div>
-
     <div class="fl-left">
         <div class="on-line">
             <div class="title">
@@ -27,7 +26,6 @@
             <div>
                 <ul></ul>
             </div>
-
         </div>
         <div class="what-new">
             <div class="title">动态</div>
@@ -81,6 +79,7 @@
 </html>
 <script src="~/Scripts/ofpages/chat.js"></script>
 <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/ofpages/core.js"></script>
 <script>
 
 
@@ -98,6 +97,20 @@
         OnlineUsers: []
         ,
         initial: function (dom, user, msgs) {
+            $('<audio id="auonline"><source src="../Content/audio/auonline.mp3" type="audio/mp3"></audio>').appendTo('body');
+            $('<audio id="newmsg"><source src="../Content/audio/msg.mp3" type="audio/mp3"></audio>').appendTo('body');
+            $('<audio id="ausend"><source src="../Content/audio/send.ogg" type="audio/ogg"></audio>').appendTo('body');
+            $(".sendbtn").bind("click", function () {
+                dChat.send();
+            });
+            $(document).keydown(function (event) {
+                if ((event.ctrlKey && event.keyCode == 13) || (event.keyCode == 13)) {
+                    dChat.send();
+                }
+            });
+            window.onbeforeunload = function (event) {
+                dChat.offLineSelf();
+            }
             dChat.user = user;
             this.onLineOne(user);
             this.setLoginState(user.NickName);
@@ -137,6 +150,7 @@
          */,
         onLineOne: function (curUser) {
             if (!dChat.OnlineUsers.containsUser(curUser)) {
+                $("#auonline")[0].play();
                 dChat.OnlineUsers.push(curUser);
                 var $newContainer = $(".what-new .list ul");
                 var $newDom = $("<li>").addClass("on-state").text(curUser.NickName + "进入了房间.");
@@ -147,11 +161,21 @@
             }
 
 
+        },
+        offLineSelf: function () {
+            $.ajax({
+                url: '../Member/OffLine/' + dChat.user.Id,
+                type: 'post',
+                dataType: 'jsonp',
+                jsonp: 'callback'
+            });
+            this.offLineOne(this.user);
+            $("script").remove();
         }
         ,
         offLineOne: function (usr) {
-            var $newContainer = $("what-new list ul");
-            var $newDom = $("<li>").addClass("on-state").text(curUser.NickName + "离开了房间.");
+            var $newContainer = $(".what-new .list ul");
+            var $newDom = $("<li>").addClass("on-state").text(usr.NickName + "离开了房间.");
             $newContainer.append($newDom);
             var $container = $(".on-line ul");
             $container.children("li.one-li").each(function () {
@@ -178,6 +202,8 @@
                             var usrs = totaldata.Users;
                             dChat.updateOnlines(usrs);
                             if (data.length > 0) {
+                                //提醒：
+                                $('#newmsg')[0].play();
                                 dChat.Index = $(data).last()[0].Id;
                                 if (data instanceof Array) {
                                     $(data).each(function () {
@@ -207,8 +233,12 @@
 
         },
         send: function () {
+
             var msg = $(".typearea .msg").val();
             $(".typearea .msg").val("");
+            if (!msg || msg.length <= 0) {
+                return;
+            }
             var msgObject = { MsgContent: msg, Sender: this.user }
             $.ajax({
                 url: this.config.apiHost + '/Message/push?value=' + msg,
@@ -218,6 +248,7 @@
                 datatype: 'jsonp',
                 jsonp: 'callback'
             });
+            $("#ausend")[0].play();
             dChat.popRight(msgObject);
 
 
@@ -234,6 +265,7 @@
                 $(dChat.OnlineUsers).each(function () {
                     var usr = this;
                     if (!usrs.containsUser(usr)) {
+                        dChat.OnlineUsers.removeUser(usr);
                         dChat.offLineOne(usr);
                     }
 
@@ -244,7 +276,7 @@
         }
         ,
         filtered: function (msg) {
-            if (msg && msg.Sender.Id != dChat.user.Id) {
+            if ((msg && msg.Sender.Id != dChat.user.Id) && msg.MsgContent.length) {
                 return true;
             }
             return false;
@@ -269,6 +301,9 @@
         popLeft: function (data) {
             var msg = decodeURI(data.MsgContent);
             var sender = data.Sender;
+            if (!InViewState()) {
+                Notice(sender.NickName + "...", msg);
+            }
             var msbody = $("<div>").addClass("left").append($("<div>").addClass("head").append($("<img>").attr("src", sender.HeadImgPath)).append($("<div>").addClass("nickname").text(sender.NickName))).append($("<div>").addClass("mscontent").text(msg));
             $(".msg-list").append(msbody);
             if ($(".msg-list>.left,.msg-list>.right").length > dChat.config.maxExistDom) {
@@ -280,16 +315,7 @@
             $(".msg-list").animate({ scrollTop: height }, 800);
         }
     };
-    //点击发送
-    $(".sendbtn").click(function () {
-        dChat.send();
-    });
-    //ctrl+enter发送
-    $(document).keydown(function (event) {
-        if ((event.ctrlKey && event.keyCode == 13) || (event.keyCode == 13)) {
-            dChat.send();
-        }
-    });
+
     $("#login").click(function () {
         var name = $("#Name").val();
         var pwd = $("#Password").val();
@@ -328,8 +354,4 @@
 </script>
 <script src="~/Scripts/notify.js"></script>
 <script>
-    Notifier.HasSupport();
-    Notifier.RequestPermission();
-    Notifier.Notify("../images/headers/1.jpg", "一个通知","通知了");
-
 </script>
