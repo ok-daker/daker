@@ -4,24 +4,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-    </style>
+    <link href="~/Content/dotting.css" rel="stylesheet" />
+    <link href="~/Content/checkbox.css" rel="stylesheet" />
     <link href="~/Content/icono.min.css" rel="stylesheet" />
     <link href="~/Content/css/index.css" rel="stylesheet" />
     @*<link href="~/content/icono.min.css" rel="stylesheet" />*@
+    <link href="~/Scripts/html5-css3-checkbox-styles/css/style.css" rel="stylesheet" />
+    <script src="~/Scripts/html5-css3-checkbox-styles/js/index.js"></script>
+    <script src="~/Scripts/html5-css3-checkbox-styles/js/prefixfree.min.js"></script>
     <meta name="viewport" content="width=device-width" />
     <title>Daker</title>
 </head>
 <body>
     <div style="text-align: right">
         <div class="usr-state">
-            <span>你好,</span><span id="curUser">你还没有登录</span>
+            <span>你好,</span><span id="curUser"></span><span  class="dotting"></span>
         </div>
+    </div>
+    <div>
     </div>
     <div class="fl-left">
         <div class="on-line">
             <div class="title">
                 当前在线用户共<span class="online-count">0</span>人.
+                <div class="check-push">
+                    <div class="slideThree check-locate" title="推送开关">
+                        <input type="checkbox" value="none" id="pushswitch" name="check" checked="" />
+                        <label for="pushswitch"></label>
+                    </div>
+                </div>
             </div>
             <div>
                 <ul></ul>
@@ -37,6 +48,7 @@
     <!--聊天框-->
     <div id="container" class="enviroment-big">
         <div class="msg-list">
+
         </div>
         <div class="typearea">
             <div style="border: none;">
@@ -47,13 +59,12 @@
     </div>
     <!--聊天框 end-->
     <!--登录-->
-    <div class="login">
+    <div class="login" style="display: none">
         <div>
             <div class="tang-title">
                 登录到DAKER
             </div>
             <form id="fm">
-
                 <div>
                     <div class="input-con">
                         <span class="icono-user"></span><input type="text" name="Name" id="Name" placeholder="用户名" />
@@ -63,7 +74,6 @@
                     <div class="input-con">
                         <span class="icono-flickr"></span><input type="password" name="Password" id="Password" placeholder="密码" />
                     </div>
-
                 </div>
                 <div class="login-btn-con">
                     <a id="login" href="#" class="login-btn">登录</a>
@@ -87,12 +97,14 @@
         config: {
             apiHost: 'http://localhost:53432',
             maxMsgLength: 100,
-            maxExistDom: 10,
+            maxExistDom: 50,
             requestTimeout: 5,
             timeout: 3
         },
         Index: '',
         user: {}
+        ,
+        Setting: { push: true }
         ,
         OnlineUsers: []
         ,
@@ -108,6 +120,11 @@
                     dChat.send();
                 }
             });
+            $("#pushswitch").click(function () {
+                var state = $(this).is(':checked');
+                dChat.Setting.push = state;
+
+            });
             window.onbeforeunload = function (event) {
                 dChat.offLineSelf();
             }
@@ -121,33 +138,7 @@
         ,
         setLoginState: function (usrName) {
             $("#curUser").text(usrName);
-        }
-        //,
-        /*OnlineFirst: function () {
-             $.ajax({
-                 url: '../Member/Onlines',
-                 type: 'get',
-                 datatype: 'jsonp',
-                 jsonp: 'callback',
-                 // timeout: dChat.config.timeout,
-                 success: function (data) {
-                     if (data.status) {
-                         var usrs = data.Data;
-                         if (usrs.length) {
-                             dChat.OnlineUsers = usrs;
-                             dChat.updateOnlines(usrs);
-                         }
-                     } else {
-                         {
-                             alert("用户名或密码错误.");
-                         }
-                     }
-                 }
-
-             });
-
-         }
-         */,
+        },
         onLineOne: function (curUser) {
             if (!dChat.OnlineUsers.containsUser(curUser)) {
                 $("#auonline")[0].play();
@@ -290,7 +281,7 @@
             $(".msg-list").append(msbody);
             if ($(".msg-list>.left,.msg-list>.right").length > dChat.config.maxExistDom) {
                 var rmIndex = $(".msg-list>.left,.msg-list>.right").length - dChat.config.maxExistDom;
-                var extraDoms = $(".msg-list>div:lt(" + rmIndex + ")");
+                var extraDoms = $(".msg-list>div:not(.check-push):lt(" + rmIndex + ")");
                 extraDoms.remove();
             }
             var height = $(".msg-list").get(0).scrollHeight;
@@ -302,20 +293,36 @@
             var msg = decodeURI(data.MsgContent);
             var sender = data.Sender;
             if (!InViewState()) {
-                Notice(sender.NickName + "...", msg);
+                if (dChat.Setting.push) {
+                    Notice(sender.NickName + "...", msg);
+                }
             }
             var msbody = $("<div>").addClass("left").append($("<div>").addClass("head").append($("<img>").attr("src", sender.HeadImgPath)).append($("<div>").addClass("nickname").text(sender.NickName))).append($("<div>").addClass("mscontent").text(msg));
             $(".msg-list").append(msbody);
             if ($(".msg-list>.left,.msg-list>.right").length > dChat.config.maxExistDom) {
                 var rmIndex = $(".msg-list>.left,.msg-list>.right").length - dChat.config.maxExistDom;
-                var extraDoms = $(".msg-list>div:lt(" + rmIndex + ")");
+                var extraDoms = $(".msg-list>div:not(.check-push):lt(" + rmIndex + ")");
                 extraDoms.remove();
             }
             var height = $(".msg-list").get(0).scrollHeight;
             $(".msg-list").animate({ scrollTop: height }, 800);
         }
     };
+    $(function () {
+        $.getJSON("../member/Info", null, function (data) {
+            if (!(data && data.status)) {
+                $(".dotting").remove();
+                $("#curUser").text("你还没有登录");
+                $(".login").show();
 
+            } else {
+                $(".dotting").remove();
+                dChat.initial($(".msg-list"), data.Data);
+            }
+           
+        });
+
+    })
     $("#login").click(function () {
         var name = $("#Name").val();
         var pwd = $("#Password").val();
@@ -354,5 +361,5 @@
 </script>
 <script src="~/Scripts/notify.js"></script>
 <script>
-  //  notifyMe();
+    //  notifyMe();
 </script>

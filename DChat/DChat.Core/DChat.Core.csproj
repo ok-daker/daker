@@ -45,7 +45,6 @@
     <Compile Include="implement\MsgHandler.cs" />
     <Compile Include="interfaces\IMemberService.cs" />
     <Compile Include="interfaces\IMsgHander.cs" />
-    <Compile Include="iplugin\IPluginBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -18,7 +18,7 @@ namespace DChat.Core.implement
     {
         private readonly IRedisCache cache = Resolver.Current.Resolve<IRedisCache>();
         private readonly int MaxLength = Convert.ToInt32(ConfigurationManager.AppSettings["DefaultInChattingLength"]);
-        private readonly int DefaultMsgLength = Convert.ToInt32(ConfigurationManager.AppSettings["10"]);
+        private readonly int DefaultMsgLength = Convert.ToInt32(ConfigurationManager.AppSettings["DefaultReturnMsgLength"]);
         private const string OnlineUserKey = "User_Online";
         private const string MsgKey = "InChatingMessages";
         private const string DBKey = "ReadyToDB";
@@ -35,12 +35,12 @@ namespace DChat.Core.implement
 
                 msgs = new Queue<MsgItem>();
             }
-      
+
             msgs.Enqueue(msg);
-            if (msgs.Count>MaxLength)
+            if (msgs.Count > MaxLength)
             {
                 //多余的 消息放到数据库缓存 准备存到数据库中
-                IEnumerable<MsgItem> msgsToDBTemp = msgs.Take(msgs.Count-MaxLength).AsEnumerable<MsgItem>();
+                IEnumerable<MsgItem> msgsToDBTemp = msgs.Take(msgs.Count - MaxLength).AsEnumerable<MsgItem>();
                 Queue<MsgItem> msgsToDB = cache.Get<Queue<MsgItem>>(DBKey) ?? new Queue<MsgItem>();
                 foreach (MsgItem item in msgsToDBTemp)
                 {
@@ -62,7 +62,7 @@ namespace DChat.Core.implement
         public IEnumerable<MsgItem> Get(Guid? id)
         {
             Queue<MsgItem> msgs;
-                try
+            try
             {
                 msgs = cache.Get<Queue<MsgItem>>(MsgKey) ?? new Queue<MsgItem>();
             }
@@ -71,7 +71,7 @@ namespace DChat.Core.implement
 
                 msgs = new Queue<MsgItem>();
             }
-               
+
             //判断当前请求Id在不在缓存对列中
             //if (msgs.AsEnumerable<MsgItem>().Where(m => m.Id == id).Count() > 0)            
             int index = (id == null) ? -1 : msgs.Select(m => m.Id).ToList().IndexOf(id.Value);
@@ -83,8 +83,8 @@ namespace DChat.Core.implement
             //不在则返回缓存中最新的10条记录
             else
             {
-                int _startIndex = msgs.Count <= 10 ? 0 : msgs.Count - 10;
-                return msgs.Skip(_startIndex).Take(10).AsEnumerable();
+                int _startIndex = msgs.Count <= DefaultMsgLength ? 0 : msgs.Count - DefaultMsgLength;
+                return msgs.Skip(_startIndex).Take(DefaultMsgLength).AsEnumerable();
             }
         }
     }

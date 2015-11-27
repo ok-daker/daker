@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DChat.Model.Models.MsgItem>
+﻿@model DChat.Model.Models.UserInfo
 @{
     Layout = null;
 }
@@ -11,14 +11,13 @@
     <title>Index</title>
 </head>
 <body>
-    <div> 
-        @*@foreach(DChat.Model.Models.MsgItem item in Model)
-        {
-            <h5>@item.Id</h5>
-            <h5>@item.MsgContent</h5>
-            <h5>@item.SendTime</h5>
-            <br/>
-        }*@
+    <div>
+        <h6>你好,@Model.Name</h6>
+    </div>
+    <div>
+        <a href="@Url.Action("Index", "Talk")">去聊天</a>
+        <a href="@Url.Action("Index", "Talk")">去论坛</a>
+        <a href="@Url.Action("Index", "Talk")">随便看看</a>
     </div>
 </body>
 </html>

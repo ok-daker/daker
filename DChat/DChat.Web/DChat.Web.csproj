@@ -159,6 +159,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\index.css" />
+    <Content Include="Content\dotting.css" />
     <Content Include="Content\icono.min.css" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\ajax-loader.png" />
@@ -193,11 +194,19 @@
     <Content Include="images\headers\jj.png" />
     <Content Include="images\headers\mm.png" />
     <Content Include="images\headers\xm.png" />
+    <Content Include="Content\checkbox.css" />
+    <Content Include="Scripts\html5-css3-checkbox-styles\css\reset.css" />
+    <Content Include="Scripts\html5-css3-checkbox-styles\css\style.css" />
+    <Content Include="Scripts\html5-css3-checkbox-styles\index.html" />
+    <Content Include="Scripts\html5-css3-checkbox-styles\js\index.js" />
+    <Content Include="Scripts\html5-css3-checkbox-styles\js\prefixfree.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Content\audio\notify.ogg" />
     <Content Include="Content\audio\send.ogg" />
     <None Include="Properties\PublishProfiles\configuration.pubxml" />
+    <Content Include="Scripts\html5-css3-checkbox-styles\config.rb" />
+    <Content Include="Scripts\html5-css3-checkbox-styles\scss\style.scss" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -248,6 +257,7 @@
     <Content Include="Views\Shared\_ViewSwitcher.cshtml" />
     <Content Include="Views\Shared\_Layout.Mobile.cshtml" />
     <Content Include="Views\Talk\Index - 复制.cshtml" />
+    <Content Include="Views\Member\Regester.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -258,7 +268,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Member\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess.EF\DChat.DataAccess.csproj">

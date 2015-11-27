@@ -1,0 +1,33 @@
+﻿.dotting { display: inline-block; min-width: 2px; min-height: 2px; box-shadow: 2px 0 currentColor, 6px 0 currentColor, 10px 0 currentColor; -webkit-animation: dot 4s infinite step-start both; animation: dot 4s infinite step-start both; *zoom: expression(this.innerHTML = '...'); }
+    .dotting:before { content: '...'; }
+    .dotting::before { content: ''; }
+:root .dotting { margin-right: 8px; }
+
+@-webkit-keyframes dot {
+    25% { box-shadow: none; }
+    50% { box-shadow: 2px 0 currentColor; }
+    75% { box-shadow: 2px 0 currentColor, 6px 0 currentColor; }
+}
+
+@keyframes dot {
+    25% { box-shadow: none; }
+    50% { box-shadow: 2px 0 currentColor; }
+    75% { box-shadow: 2px 0 currentColor, 6px 0 currentColor; }
+}
+
+.dotting2 { display: inline-block; width: 10px; min-height: 2px; border-left: 2px solid currentColor; border-right: 2px solid currentColor; background-color: currentColor; background-clip: content-box; box-sizing: border-box; -webkit-animation: dot2 4s infinite step-start both; animation: dot2 4s infinite step-start both; *zoom: expression(this.innerHTML = '...'); }
+    .dotting2:before { content: '...'; }
+    .dotting2::before { content: ''; }
+:root .dotting2 { margin-left: 2px; padding-left: 2px; padding-right: 2px; }
+
+@-webkit-keyframes dot2 {
+    25% { border-color: transparent; background-color: transparent; }
+    50% { border-right-color: transparent; background-color: transparent; }
+    75% { border-right-color: transparent; }
+}
+
+@keyframes dot2 {
+    25% { border-color: transparent; background-color: transparent; }
+    50% { border-right-color: transparent; background-color: transparent; }
+    75% { border-right-color: transparent; }
+}
