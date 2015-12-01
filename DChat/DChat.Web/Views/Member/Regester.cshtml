@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+}
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .form-group > input:not([type='submit']):not([type='radio']) { width: 300px; height: 30px; }
+        .form-group label { font-family: 'SimSun'; font-weight: 300; }
+        .form-title { font-size: 16px; font-weight: 600; padding-left: 15%; }
+        .form-container { padding-top: 50px; }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <title>Regester</title>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-8 col-md-offset-4">
+            <div class="form-container">
+                <div class="form-title">
+                    填写个人信息
+                </div>
+                <form role="form" method="POST">
+                    <div class="form-group">
+                        <input type="file" placeholder="头像" name="HeadImgPath" id="HeadImgPath" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="用户名" name="Name" id="Name" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="昵称" name="NickName" id="NickName" required="required" />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" placeholder="邮箱" name="Email" id="Email" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="Password" id="Password" placeholder="输入密码" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="ConfirPwd" id="ConfigPwd" placeholder="确认密码" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <label>选择性别:</label>
+                        <label>男</label> <input type="radio" name="Six" />
+                        <label>女</label> <input type="radio" name="Six" />
+                    </div>
+                    <div style="padding-left: 15%">
+                        <input type="submit" value="提交" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script>
+    $("#ConfigPwd").focusout(function () {
+        if ($("#Password").val() != $("#ConfigPwd").val())
+            $("#ConfigPwd").get(0).setCustomValidity("两次输入的密码不一致.");
+        else {
+            $("#ConfigPwd").get(0).setCustomValidity("");
+        }
+    });
+    $("#Name").focusout(function () {
+        if (!($(this).val())) return;
+        $.ajax({
+            url: "CheckExist?name=" + $(this).val(),
+            type: 'get',
+            success: function (yes) {
+                if (yes!="False") {
+                    $("#Name").get(0).setCustomValidity("此用户名已被占用.");
+                }
+            }
+        });
+
+    });
+</script>
