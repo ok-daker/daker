@@ -18,7 +18,7 @@
 <body>
     <div style="text-align: right">
         <div class="usr-state">
-            <span>你好,</span><span id="curUser"></span><span  class="dotting"></span>
+            <span>你好,</span><span id="curUser"></span><span class="dotting"></span>
         </div>
     </div>
     <div>
@@ -317,9 +317,12 @@
 
             } else {
                 $(".dotting").remove();
+                $.post("../member/comechat", { id: data.Data.Id },function(data) {
+                    
+                });
                 dChat.initial($(".msg-list"), data.Data);
             }
-           
+
         });
 
     })
@@ -342,6 +345,9 @@
                 if (jsondata.status) {
                     $(".login").slideUp();
                     dChat.initial($(".msg-list"), jsondata.Data);
+                    $.post("../member/comechat", { id: jsondata.Data.Id }, function (data) {
+
+                    });
                 } else {
                     {
                         alert("用户名或密码错误.");

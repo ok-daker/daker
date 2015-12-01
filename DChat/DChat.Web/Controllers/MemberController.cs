@@ -49,6 +49,13 @@ namespace DChat.Web.Controllers
             }
         }
 
+        public JsonResult ComeChat(int id)
+        {
+            var member = _service.GetByID(id);
+            UsersContext.AddOnLine(member);
+            return Json(new {status = 1},JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult Info()
         {
             if (Request.Cookies.Get("DAKER_USR_ID") != null)
