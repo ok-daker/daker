@@ -166,7 +166,7 @@
         ,
         offLineOne: function (usr) {
             var $newContainer = $(".what-new .list ul");
-            var $newDom = $("<li>").addClass("on-state").text(usr.NickName + "离开了房间.");
+            var $newDom = $("<li>").addClass("off-state").text(usr.NickName + "离开了房间.");
             $newContainer.append($newDom);
             var $container = $(".on-line ul");
             $container.children("li.one-li").each(function () {
