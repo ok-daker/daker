@@ -322,8 +322,18 @@
                 });
                 dChat.initial($(".msg-list"), data.Data);
             }
-
         });
+        //回车登录事件
+        $(".login").bind("keydown", function (e) {
+            // 兼容FF和IE和Opera    
+            var theEvent = e || window.event;
+            var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+            if (code == 13) {
+                //回车执行登录
+                $("#login").click();
+            }
+        });
+
 
     })
     $("#login").click(function () {
