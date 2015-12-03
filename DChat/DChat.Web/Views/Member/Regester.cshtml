@@ -1,17 +1,21 @@
 ﻿@{
     Layout = null;
 }
-
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Scripts/webuploader-0.1.5/webuploader.css" rel="stylesheet" />
 <!DOCTYPE html>
 <html>
 <head>
     <style>
+        #uploader { margin-bottom: 10px; margin-top: 30px; }
         .form-group > input:not([type='submit']):not([type='radio']) { width: 300px; height: 30px; }
         .form-group label { font-family: 'SimSun'; font-weight: 300; }
         .form-title { font-size: 16px; font-weight: 600; padding-left: 15%; }
         .form-container { padding-top: 50px; }
+        .webuploader-container { display: inline-block; vertical-align: bottom; }
+        .pre-view { width: 100px; height: 100px; }
+        .webuploader-pick { background: none; position: relative; display: inline-block; cursor: pointer; /* background: #00b7ee; */ padding: 5px 5px; color: #9B2E3F; text-align: center; border-radius: 3px; overflow: hidden; font-size: 6px; }
     </style>
     <meta name="viewport" content="width=device-width" />
     <title>Regester</title>
@@ -24,8 +28,11 @@
                     填写个人信息
                 </div>
                 <form role="form" method="POST">
-                    <div class="form-group">
-                        <input type="file" placeholder="头像" name="HeadImgPath" id="HeadImgPath" />
+                    <div id="uploader">
+                        <!--用来存放item-->
+                        <input type="hidden" placeholder="头像" name="HeadImgPath" id="HeadImgPath" />
+                        <img id="imgview" title="请上传头像" class="pre-view"></img>
+                        <div id="filePicker">上传头像</div>
                     </div>
                     <div class="form-group">
                         <input type="text" placeholder="用户名" name="Name" id="Name" required="required" />
@@ -33,7 +40,6 @@
                     <div class="form-group">
                         <input type="text" placeholder="昵称" name="NickName" id="NickName" required="required" />
                     </div>
-
                     <div class="form-group">
                         <input type="email" placeholder="邮箱" name="Email" id="Email" required="required" />
                     </div>
@@ -45,8 +51,8 @@
                     </div>
                     <div class="form-group">
                         <label>选择性别:</label>
-                        <label>男</label> <input type="radio" name="Six" />
-                        <label>女</label> <input type="radio" name="Six" />
+                        <label>男</label> <input type="radio" value="0" name="Six" />
+                        <label>女</label> <input type="radio" value="1" name="Six" />
                     </div>
                     <div style="padding-left: 15%">
                         <input type="submit" value="提交" />
@@ -59,25 +65,124 @@
 </html>
 <script src="~/Scripts/jquery-2.1.4.min.js"></script>
 <script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/webuploader-0.1.5/webuploader.js"></script>
 <script>
-    $("#ConfigPwd").focusout(function () {
+    var UPLOAD_PATH = '';
+</script>
+<script>
+    $("#ConfigPwd").focusout(function() {
         if ($("#Password").val() != $("#ConfigPwd").val())
             $("#ConfigPwd").get(0).setCustomValidity("两次输入的密码不一致.");
         else {
             $("#ConfigPwd").get(0).setCustomValidity("");
         }
     });
-    $("#Name").focusout(function () {
+    $("#Name").focusout(function() {
         if (!($(this).val())) return;
         $.ajax({
             url: "CheckExist?name=" + $(this).val(),
             type: 'get',
-            success: function (yes) {
-                if (yes!="False") {
+            success: function(yes) {
+                if (yes != "False") {
                     $("#Name").get(0).setCustomValidity("此用户名已被占用.");
                 }
             }
         });
 
+    });
+</script>
+<script>
+    var uploader = WebUploader.create({
+        auto: true,
+        swf: '~/Scripts/webuploader-0.1.5/Uploader.swf',
+        server: UPLOAD_PATH,
+        pick: '#filePicker',
+        multiple: true,
+        accept: {
+            title: 'Images',
+            extensions: 'gif,jpg,jpeg,bmp,png',
+            mimeTypes: 'image/*'
+        },
+        thumb: {
+            width: 110,
+            height: 110,
+
+            // 图片质量，只有type为`image/jpeg`的时候才有效。
+            quality: 70,
+
+            // 是否允许放大，如果想要生成小图的时候不失真，此选项应该设置为false.
+            allowMagnify: true,
+
+            // 是否允许裁剪。
+            crop: true,
+
+            // 为空的话则保留原有图片格式。
+            // 否则强制转换成指定的类型。
+            type: 'image/jpeg'
+        }
+
+    });
+
+    uploader.on('fileQueued', function (file) {
+        //var $li = $(
+        //        '<div id="' + file.id + '" class="file-item thumbnail">' +
+        //            '<img>' +
+        //            '<div class="info">' + file.name + '</div>' +
+        //        '</div>'
+        //        ),
+        //    $img = $li.find('img');
+
+
+        //// $list为容器jQuery实例
+        //$("#fileList").append($li);
+
+        // 创建缩略图
+        // 如果为非图片文件，可以不用调用此方法。
+        // thumbnailWidth x thumbnailHeight 为 100 x 100
+        uploader.makeThumb(file, function (error, src) {
+            if (error) {
+                $("#imgview").attr("title", "不能预览");
+                return;
+            }
+            $("#imgview").attr('src', src);
+        }, 100, 100);
+        // 文件上传过程中创建进度条实时显示。
+        uploader.on('uploadProgress', function (file, percentage) {
+            var $li = $('#' + file.id),
+                $percent = $li.find('.progress span');
+
+            // 避免重复创建
+            if (!$percent.length) {
+                $percent = $('<p class="progress"><span></span></p>')
+                        .appendTo($li)
+                        .find('span');
+            }
+
+            $percent.css('width', percentage * 100 + '%');
+        });
+
+        // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+        uploader.on('uploadSuccess', function (file) {
+            $("#HeadImgPath").val();
+            $('#').addClass('upload-state-done');
+        });
+
+        // 文件上传失败，显示上传出错。
+        uploader.on('uploadError', function (file, respone) {
+            var $li = $('#' + file.id),
+                $error = $li.find('div.error');
+
+            // 避免重复创建
+            if (!$error.length) {
+                $error = $('<div class="error"></div>').appendTo($li);
+            }
+
+            $error.text('上传失败');
+        });
+
+        // 完成上传完了，成功或者失败，先删除进度条。
+        uploader.on('uploadComplete', function (file) {
+            $('#' + file.id).find('.progress').remove();
+        });
     });
 </script>

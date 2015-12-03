@@ -227,6 +227,23 @@
     <Content Include="Scripts\notify.js" />
     <Content Include="Scripts\ofpages\chat.js" />
     <Content Include="Scripts\ofpages\core.js" />
+    <Content Include="Scripts\webuploader-0.1.5\Uploader.swf" />
+    <Content Include="Scripts\webuploader-0.1.5\webuploader.css" />
+    <Content Include="Scripts\webuploader-0.1.5\webuploader.custom.js" />
+    <Content Include="Scripts\webuploader-0.1.5\webuploader.custom.min.js" />
+    <Content Include="Scripts\webuploader-0.1.5\webuploader.fis.js" />
+    <Content Include="Scripts\webuploader-0.1.5\webuploader.flashonly.js" />
+    <Content Include="Scripts\webuploader-0.1.5\webuploader.flashonly.min.js" />
+    <Content Include="Scripts\webuploader-0.1.5\webuploader.html5only.js" />
+    <Content Include="Scripts\webuploader-0.1.5\webuploader.html5only.min.js" />
+    <Content Include="Scripts\webuploader-0.1.5\webuploader.js" />
+    <Content Include="Scripts\webuploader-0.1.5\webuploader.min.js" />
+    <Content Include="Scripts\webuploader-0.1.5\webuploader.noimage.js" />
+    <Content Include="Scripts\webuploader-0.1.5\webuploader.noimage.min.js" />
+    <Content Include="Scripts\webuploader-0.1.5\webuploader.nolog.js" />
+    <Content Include="Scripts\webuploader-0.1.5\webuploader.nolog.min.js" />
+    <Content Include="Scripts\webuploader-0.1.5\webuploader.withoutimage.js" />
+    <Content Include="Scripts\webuploader-0.1.5\webuploader.withoutimage.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -258,6 +275,7 @@
     <Content Include="Views\Shared\_Layout.Mobile.cshtml" />
     <Content Include="Views\Talk\Index - 复制.cshtml" />
     <Content Include="Views\Member\Regester.cshtml" />
+    <Content Include="Scripts\webuploader-0.1.5\README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
